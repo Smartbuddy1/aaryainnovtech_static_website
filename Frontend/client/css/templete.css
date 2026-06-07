@@ -1,0 +1,386 @@
+/*==========================
+	Custom css
+==========================*/
+
+.h2 {
+    font-family: "Roboto Slab", serif;
+    color: #2e1e13;
+    font-size: 38px;
+    line-height: 38px;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.h2.text-white {
+    color: #fff;
+}
+/* Our Awesome Services */
+
+.awesome-services .icon-bx-md img {
+    height: 55px;
+}
+.awesome-services .icon-bx-wraper:hover {
+    border-color: #8DC141;
+}
+/* Wha Choose Us */
+
+.choose-us h4 {
+    line-height: 28px;
+}
+/* Team */
+
+.team-social-btn ul li a:hover {
+    background: #8DC141
+}
+.team-social-btn ul li a {
+    background: #d5d2d0;
+    color: #fff;
+    border: 0;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+}
+.rdx-box.hover:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.rdx-member-position:after,
+.rdx-member-position:before {
+    background: #4a3c32;
+    top: 50%;
+    left: -40px;
+    content: "";
+    height: 1px;
+    position: absolute;
+    width: 30px;
+}
+.rdx-member-position:before {
+    right: -40px;
+    left: auto;
+}
+.rdx-member-position {
+    position: relative;
+}
+/* Our Projects */
+
+.our-projects-galery .rdx-gallery-box {
+    margin-bottom: 0;
+}
+/* News */
+
+.date-style-4 {}
+/* Separator */
+
+.border-dark.rdx-separator,
+.border-white.rdx-separator {
+    width: 35px;
+}
+.border-dark.rdx-separator[class*="style-"]::after,
+.border-dark.rdx-separator[class*="style-"]::before {
+    background-color: #2E1E13;
+}
+.border-white.rdx-separator[class*="style-"]::after,
+.border-white.rdx-separator[class*="style-"]::before {
+    background-color: #fff;
+}
+/* Mack An Appointment */
+
+.mack-an-appointment input[type="text"],
+.mack-an-appointment textarea {
+    background-color: #ebebeb;
+    border: 0
+}
+.mack-an-appointment .bootstrap-select .dropdown-toggle {
+    background-color: #ebebeb !important;
+    border: 0 !important
+}
+.mack-an-appointment .form-group {
+    margin-bottom: 15px;
+}
+.mack-an-appointment [class*="col-md-"] {
+    padding: 0 7.5px;
+}
+.mack-an-appointment .section-head {
+    margin-bottom: 20px;
+}
+.mack-an-appointment .section-head p {
+    padding-top: 0;
+}
+.mack-an-appointment .section-head h2 {
+    margin-bottom: 20px;
+}
+.mack-an-appointment {
+    position: relative;
+    z-index: 11
+}
+.mack-an-appointment:after {
+    background: rgba(0, 0, 0, 0);
+    bottom: -7px;
+    box-shadow: 0 3px 11px 4px rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    height: 0;
+    left: 5%;
+    position: absolute;
+    width: 90%;
+    z-index: -1;
+}
+.apointment-girl {
+    width: 615px;
+    max-width: none;
+    position: relative;
+    z-index: 1;
+}
+/* Company Stats */
+
+.company-stats-worker {
+    bottom: 0;
+    position: absolute;
+    right: 0;
+}
+.company-stats .row {
+    position: relative;
+}
+.header-style-1 .is-fixed .extra-nav {
+    padding: 15px 0 0;
+}
+/* footer */
+
+.footer-bottom a {
+    color: #787878;
+    padding-left: 5px;
+}
+/* btn */
+
+.skew-primary:after,
+.skew-secondry:after {
+    z-index: -1;
+    transition: all 0.5s ease 0s;
+    background: #2e1e13 none repeat scroll 0 0;
+    bottom: -10px;
+    content: "";
+    height: 20px;
+    position: absolute;
+    right: -10px;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 20px;
+}
+.skew-primary:after {
+    background: #8DC141;
+}
+.skew-secondry,
+.skew-primary {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+.skew-secondry[class*="site-button"]:hover,
+.skew-primary[class*="site-button"]:hover {
+    color: #fff;
+}
+.skew-secondry:hover::after,
+.skew-primary:hover::after {
+    -moz-transform: scale(30);
+    -webkit-transform: scale(30);
+    -o-transform: scale(30);
+    -ms-transform: scale(30);
+    transform: scale(30);
+    z-index: -1;
+    color: #fff;
+}
+.bg-img-fix {
+    background-size: cover;
+}
+/* btn end */
+/* Footer Overlay */
+
+.footer-overlay .footer-bottom {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+.footer-overlay .footer-top {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+/* overlay-50 */
+
+.overlay-50:after {
+    width: 50%;
+}
+/* Home Page 2 */
+
+.appointment2 .mack-an-appointment::after {
+    display: none;
+}
+.appointment2 .mack-an-appointment {
+    background-color: #fff;
+}
+.our-projects-block .rdx-img-effect img {
+    height: 400px;
+    object-fit: cover;
+}
+/* header-topbar */
+
+.header-style-1 .top-bar .rdx-topbar-left {
+    padding: 0 0;
+}
+/* Home 3 */
+
+.about3 .h2 {
+    line-height: 50px;
+    margin-bottom: 0;
+}
+/* Home 4 */
+
+.black.mack-an-appointment::after {
+    display: none;
+}
+.black.mack-an-appointment {
+    background-color: #263247;
+}
+.awesome-services-4 .icon-bx-wraper {
+    border-style: dashed;
+}
+.awesome-services-4 .icon-bx-wraper:hover {
+    border-color: #6AAF08;
+}
+.company-status .counter {
+    font-family: "Roboto Slab", serif;
+    font-size: 60px;
+    font-weight: 300;
+}
+/* */
+
+.heart {
+    color: #cf4040;
+    padding: 0 5px;
+}
+.provider-box-bg {
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 1px solid #e0e0e0;
+    height: 480px;
+    transition: all 4s linear 0s;
+    display: block;
+    box-shadow: 5px 5px 0 0 #e0e0e0;
+}
+.provider-box-bg:hover {
+    background-position: center bottom;
+}
+.no-skew .social-bx.list-inline.pull-left {
+    margin-left: 0;
+}
+@media only screen and (max-width: 1200px) {
+    .extra-nav {
+        display: none;
+    }
+    .worker img {
+        padding: 0 20px;
+    }
+    .apointment-girl {
+        float: right;
+    }
+}
+@media only screen and (max-width: 1024px) {
+    .extra-nav .extra-cell {
+        margin-right: 2px;
+    }
+}
+@media only screen and (max-width: 991px) {
+    .apointment-girl,
+    .worker img {
+        display: none;
+    }
+	.button-layout .site-button-link, 
+	.button-layout .site-secondry, 
+	.button-layout .site-button, 
+	.btn{
+		margin-bottom:10px;
+	}
+}
+@media only screen and (max-width: 767px) {
+    .no-skew .social-bx.list-inline.pull-left {
+        display: none;
+    }
+    .company-stats-worker {
+        display: none;
+    }
+    .appointment {
+        padding-top: 20px;
+    }
+    .h2 {
+        font-size: 24px;
+        line-height: 28px;
+    }
+    .awesome-services .icon-bx-md {
+        display: none;
+    }
+    .awesome-services .icon-content {
+        padding: 0;
+        text-align: left;
+    }
+    .header-style-1 .top-bar .rdx-topbar-right {
+        display: none;
+    }
+    .footer-bottom .col-md-4 {
+        text-align: center;
+        padding-bottom: 5px;
+        padding-top: 5px;
+    }
+}
+/* overlay bg image */
+/* Spacing */
+.content-inner{
+	padding-top:70px;
+	padding-bottom:40px;
+}
+.content-inner-1{
+	padding-top:70px;
+	padding-bottom:70px;
+}
+.content-inner-2{
+	padding-top:70px;
+	padding-bottom:0px;
+}
+/* Google Recaptcha */
+.g-recaptcha{
+    transform:scale(0.77);
+    -webkit-transform:scale(0.77);
+    -moz-transform:scale(0.77);
+    -o-transform:scale(0.77);
+    
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+}
+
+#rc-imageselect {
+    transform:scale(0.77);
+    -webkit-transform:scale(0.77);
+    -moz-transform:scale(0.77);
+    -o-transform:scale(0.77);
+    
+    transform-origin:0 0;
+    -o-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+}
+@media screen and (max-height: 575px){
+#rc-imageselect, .g-recaptcha {
+        transform:scale(0.77);
+        -moz-transform:scale(0.77);
+        -o-transform:scale(0.77);
+        -webkit-transform:scale(0.77);
+        
+        transform-origin:0 0;
+        -moz-transform-origin:0 0;
+        -o-transform-origin:0 0;
+        -webkit-transform-origin:0 0;
+    
+    }
+}
+/* Google Recaptcha */

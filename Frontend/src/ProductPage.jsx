@@ -37,10 +37,19 @@ function ProductPage({ product, onNavigateHome, onNavigateProduct }) {
                 <ArrowLeft size={17} /> All solutions
               </button>
             </div>
+            <div className="product-page-hero-signals">
+              <span><CheckCircle2 size={15} /> OEM since 2010</span>
+              <span><CheckCircle2 size={15} /> Site-ready deployment</span>
+              <span><CheckCircle2 size={15} /> Service support</span>
+            </div>
           </div>
           <div className="product-page-hero-image" data-reveal>
             <img src={product.image} alt={product.imageAlt} />
             <span><CheckCircle2 size={16} /> Smart Buddy product</span>
+            <div className="product-page-image-note">
+              <small>Product line</small>
+              <strong>{product.eyebrow}</strong>
+            </div>
           </div>
         </div>
       </section>
@@ -50,9 +59,9 @@ function ProductPage({ product, onNavigateHome, onNavigateProduct }) {
           <div className="section-heading split-heading" data-reveal>
             <div>
               <span className="eyebrow"><Leaf size={15} /> Product overview</span>
-              <h2>Built around practical, everyday use.</h2>
+              <h2>Applications, build quality, and operating highlights.</h2>
             </div>
-            <p>Explore the key benefits, applications, and configuration details carried over from the original Smart Buddy product page.</p>
+            <p>A structured view of where this product fits, how it is built, and which points matter during procurement.</p>
           </div>
           <div className="product-highlight-grid">
             {product.highlights.map((highlight, index) => (
@@ -114,7 +123,7 @@ function ProductPage({ product, onNavigateHome, onNavigateProduct }) {
             <div data-reveal>
               <span className="eyebrow"><Factory size={15} /> Product range</span>
               <h2>{product.specificationTitle}</h2>
-              <p>Select the configuration that best fits your site. Our team can guide the final product choice during your enquiry.</p>
+              <p>Select the configuration that best fits your site. Our team can guide the final choice during your enquiry.</p>
             </div>
             <div className="product-table-wrap" data-reveal>
               <table>
