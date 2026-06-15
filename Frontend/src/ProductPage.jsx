@@ -7,6 +7,7 @@ import {
   Factory,
   Leaf,
   Mail,
+  PlayCircle,
   Sparkles,
 } from "lucide-react";
 import { productPageList } from "./productPages.js";
@@ -86,14 +87,33 @@ function ProductPage({ product, onNavigateHome, onNavigateProduct }) {
             <h2>{product.overviewTitle}</h2>
             {product.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
-          <aside className="product-feature-card" data-reveal>
-            <span className="eyebrow">{product.featureTitle}</span>
-            <ul>
-              {product.features.map((feature) => (
-                <li key={feature}><CheckCircle2 size={16} /> <span>{feature}</span></li>
-              ))}
-            </ul>
-          </aside>
+          <div className="product-page-side-stack" data-reveal>
+            {product.demoVideo && (
+              <article className="product-video-card">
+                <div className="product-video-card-media">
+                  <video
+                    src={product.demoVideo.src}
+                    controls
+                    playsInline
+                    preload="metadata"
+                    aria-label={product.demoVideo.title}
+                  />
+                </div>
+                <div className="product-video-card-copy">
+                  <span><PlayCircle size={15} /> {product.demoVideo.label}</span>
+                  <strong>{product.demoVideo.title}</strong>
+                </div>
+              </article>
+            )}
+            <aside className="product-feature-card">
+              <span className="eyebrow">{product.featureTitle}</span>
+              <ul>
+                {product.features.map((feature) => (
+                  <li key={feature}><CheckCircle2 size={16} /> <span>{feature}</span></li>
+                ))}
+              </ul>
+            </aside>
+          </div>
         </div>
       </section>
 

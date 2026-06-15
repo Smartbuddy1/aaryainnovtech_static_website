@@ -8,6 +8,11 @@ export const productPages = {
       "A self-cleaning public toilet system with automatic flushing, floor and wall cleaning, smart access options, backup support, and monitoring-ready operation.",
     image: "/media/products/electronic-eco-toilet-new.png",
     imageAlt: "Smart Buddy Electronic ECO Toilet product view",
+    demoVideo: {
+      src: "/media/products/electronic-eco-toilet-demo.mp4",
+      label: "Product demo",
+      title: "Electronic ECO Toilet in action",
+    },
     overviewTitle: "Maintainable public toilets with automated hygiene support.",
     overview: [
       "E2T (Electronic ECO Toilet) is a maintainable public toilet system with self-cleaning mechanisms. If a user forgets to flush, the toilet can flush automatically, and a floor and wall cleaning cycle can run after four to ten visits.",

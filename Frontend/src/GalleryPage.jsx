@@ -2,11 +2,10 @@ import React from "react";
 import {
   ArrowLeft,
   ArrowRight,
-  BadgeCheck,
   Building2,
   Camera,
   Globe2,
-  Images,
+  PlayCircle,
   Sparkles,
   Trophy,
   Users,
@@ -15,6 +14,31 @@ import {
 const galleryPath = (section, file) => `/media/gallery/${section}/${file}`;
 
 const gallerySections = [
+  {
+    id: "featured-videos",
+    eyebrow: "Featured videos",
+    title: "Smart Buddy video highlights",
+    summary: "Priority videos covering the Smart Buddy product portfolio, engineering work, and award recognition.",
+    icon: PlayCircle,
+    images: [
+      {
+        src: galleryPath("featured-videos", "smart-buddy-company-portfolio.mp4"),
+        poster: galleryPath("featured-videos", "smart-buddy-company-portfolio-poster.jpg"),
+        title: "Smart Buddy company portfolio reel",
+        alt: "Smart Buddy company portfolio video opening with the Smart Buddy brand and engineering message",
+        size: "wide",
+        type: "video",
+      },
+      {
+        src: galleryPath("featured-videos", "udyog-janani-kamal-puraskar-2017.mp4"),
+        poster: galleryPath("featured-videos", "udyog-janani-kamal-puraskar-2017-poster.jpg"),
+        title: "Udyog Janani Kamal Puraskar 2017 recognition",
+        alt: "Smart Buddy award recognition video with product demonstration work",
+        size: "wide",
+        type: "video",
+      },
+    ],
+  },
   {
     id: "public-sanitation",
     eyebrow: "Public sanitation",
@@ -88,20 +112,15 @@ const galleryItems = gallerySections.flatMap((section) =>
   })),
 );
 
-const galleryStats = [
-  { value: String(galleryItems.length).padStart(2, "0"), label: "Photos", icon: Images },
-  { value: String(gallerySections.length).padStart(2, "0"), label: "Sections", icon: BadgeCheck },
-  { value: "ECO", label: "Site work", icon: Building2 },
-  { value: "SPL", label: "Events", icon: Trophy },
-];
-
 function GalleryPage({ onNavigateHome, onOpenMedia }) {
-  const openImage = (image) => {
+  const openMedia = (image) => {
     onOpenMedia?.({
       title: image.title,
       category: image.category,
       src: image.src,
       alt: image.alt,
+      type: image.type,
+      poster: image.poster,
     });
   };
 
@@ -137,21 +156,6 @@ function GalleryPage({ onNavigateHome, onOpenMedia }) {
               </button>
             </div>
           </div>
-
-          <aside className="gallery-page-panel" data-reveal>
-            <div className="gallery-page-panel-image">
-              <img src={galleryItems[0].src} alt={galleryItems[0].alt} loading="eager" decoding="async" />
-            </div>
-            <div className="gallery-page-proof">
-              {galleryStats.map(({ value, label, icon: Icon }) => (
-                <article key={label}>
-                  <Icon size={18} />
-                  <strong>{value}</strong>
-                  <span>{label}</span>
-                </article>
-              ))}
-            </div>
-          </aside>
         </div>
       </section>
 
@@ -205,21 +209,26 @@ function GalleryPage({ onNavigateHome, onOpenMedia }) {
                 </div>
                 <aside>
                   <strong>{String(section.images.length).padStart(2, "0")}</strong>
-                  <span>Photos</span>
+                  <span>Media</span>
                 </aside>
               </div>
 
               <div className="gallery-page-grid" data-reveal>
                 {section.images.map((image, imageIndex) => (
                   <button
-                    className={`gallery-page-card is-${image.size || "standard"}`}
+                    className={`gallery-page-card is-${image.size || "standard"} ${image.type === "video" ? "is-video" : ""}`}
                     type="button"
-                    onClick={() => openImage({ ...image, category: section.eyebrow })}
+                    onClick={() => openMedia({ ...image, category: section.eyebrow })}
                     data-reveal
-                    style={{ "--reveal-delay": `${imageIndex * 45}ms`, "--gallery-image": `url(${image.src})` }}
+                    style={{ "--reveal-delay": `${imageIndex * 45}ms`, "--gallery-image": `url(${image.poster || image.src})` }}
                     key={image.src}
                   >
-                    <img src={image.src} alt={image.alt} loading="eager" decoding="async" />
+                    <img src={image.poster || image.src} alt={image.alt} loading="eager" decoding="async" />
+                    {image.type === "video" && (
+                      <span className="gallery-page-video-badge">
+                        <PlayCircle size={16} /> Video
+                      </span>
+                    )}
                     <span>{section.eyebrow}</span>
                     <strong>{image.title}</strong>
                   </button>

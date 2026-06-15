@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
+import L from "leaflet";
+import markerIconRetinaUrl from "leaflet/dist/images/marker-icon-2x.png";
+import markerIconUrl from "leaflet/dist/images/marker-icon.png";
+import markerShadowUrl from "leaflet/dist/images/marker-shadow.png";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -156,7 +160,29 @@ const newArrivalProduct = {
   eyebrow: "New arrival",
   title: "Solar-ready smart toilet block",
   text: "A compact public toilet block concept with men, women, and accessible cabins, exterior lighting, rooftop solar support, and Smart Buddy branding for civic locations.",
-  image: "/media/new-arrivals/solar-smart-toilet-block.jpeg",
+  image: "/media/new-arrivals/utility-toilet-shop-red-render.jpeg",
+  images: [
+    {
+      src: "/media/new-arrivals/utility-toilet-shop-red-render.jpeg",
+      alt: "Red smart toilet and shop block render with male, female, and maintenance area entrances",
+      label: "Retail utility block",
+    },
+    {
+      src: "/media/new-arrivals/utility-toilet-shop-top-view.jpeg",
+      alt: "Top view concept drawing of public toilet block with shop and jogging track",
+      label: "Top view plan",
+    },
+    {
+      src: "/media/new-arrivals/smart-buddy-utility-shop-toilet.jpeg",
+      alt: "Smart Buddy shop and toilet block concept with public walkway and restroom doors",
+      label: "Shop and toilet concept",
+    },
+    {
+      src: "/media/new-arrivals/bio-toilet-plan-specifications.jpeg",
+      alt: "Bio toilet concept board with exterior render, plan view, features, and specifications",
+      label: "Bio toilet plan",
+    },
+  ],
   highlights: ["Solar-ready roof", "Accessible cabin", "Men and women layout"],
 };
 
@@ -275,6 +301,20 @@ const stats = [
 
 const testimonials = [
   {
+    title: "ECO Toilet site feedback 01",
+    quote: "A focused 30-second on-site testimonial recorded beside a Smart Buddy public toilet installation.",
+    role: "Public sanitation feedback",
+    video: "/media/testimonials/eco-toilet-site-feedback-01.mp4",
+    poster: "/media/testimonials/posters/eco-toilet-site-feedback-01-poster.jpg",
+  },
+  {
+    title: "ECO Toilet site feedback 02",
+    quote: "A short customer-side field note from the installed ECO Toilet site environment.",
+    role: "Site feedback",
+    video: "/media/testimonials/eco-toilet-site-feedback-02.mp4",
+    poster: "/media/testimonials/posters/eco-toilet-site-feedback-02-poster.jpg",
+  },
+  {
     title: "Client testimonial 01",
     quote: "A short field view of a Smart Buddy installation with practical feedback from the site.",
     role: "Field feedback",
@@ -352,11 +392,6 @@ const galleryItems = [
     size: "side",
   },
   {
-    title: "Electronic eco toilet deployment",
-    category: "Eco Toilets",
-    image: "/media/eco-toilet-park.jpeg",
-  },
-  {
     title: "Ranchi civic installation",
     category: "Eco Toilets",
     image: "/media/eco-toilet-ranchi-twin.jpeg",
@@ -385,6 +420,117 @@ const galleryItems = [
   },
 ];
 
+const installationLocations = [
+  { name: "Sangamner", district: "Ahilyanagar", state: "Maharashtra", lat: 19.4906351, lng: 74.2466821 },
+  { name: "Hupari", district: "Kolhapur", state: "Maharashtra", lat: 16.6175903, lng: 74.4067388 },
+  { name: "Gadhinglaj", district: "Kolhapur", state: "Maharashtra", lat: 16.1409008, lng: 74.4036933 },
+  { name: "Kagal", district: "Kolhapur", state: "Maharashtra", lat: 16.5750891, lng: 74.3152571 },
+  { name: "Chandgad", district: "Kolhapur", state: "Maharashtra", lat: 15.9014301, lng: 74.2405621 },
+  { name: "Shirol", district: "Kolhapur", state: "Maharashtra", lat: 16.7103974, lng: 74.581218 },
+  { name: "Murgud", district: "Kolhapur", state: "Maharashtra", lat: 16.3940635, lng: 74.1907099 },
+  { name: "Ajara", district: "Kolhapur", state: "Maharashtra", lat: 16.1160798, lng: 74.2100716 },
+  { name: "Vadgaon", district: "Kolhapur", state: "Maharashtra", lat: 16.5793365, lng: 74.2303812 },
+  { name: "Kurundwad", district: "Kolhapur", state: "Maharashtra", lat: 16.6810968, lng: 74.5915436 },
+  { name: "Hatkanangle", district: "Kolhapur", state: "Maharashtra", lat: 16.7445098, lng: 74.3753175 },
+  { name: "Jaysingpur", district: "Kolhapur", state: "Maharashtra", lat: 16.7789886, lng: 74.5564244 },
+  { name: "Ichalkaranji", district: "Kolhapur", state: "Maharashtra", lat: 16.6959348, lng: 74.4555755 },
+  { name: "Panhala", district: "Kolhapur", state: "Maharashtra", lat: 16.8066833, lng: 74.1125979 },
+  { name: "Bhokar", district: "Nanded", state: "Maharashtra", lat: 19.1948254, lng: 77.683399 },
+  { name: "Mahur", district: "Nanded", state: "Maharashtra", lat: 19.8479785, lng: 77.9217634 },
+  { name: "Hadgaon", district: "Nanded", state: "Maharashtra", lat: 19.4786171, lng: 77.6068042 },
+  { name: "Kinwat", district: "Nanded", state: "Maharashtra", lat: 19.577469, lng: 78.2440088 },
+  { name: "Dharmabad", district: "Nanded", state: "Maharashtra", lat: 18.9216786, lng: 77.762348 },
+  { name: "Loha", district: "Nanded", state: "Maharashtra", lat: 18.9360844, lng: 77.1015489 },
+  { name: "Mandavi Beach", district: "Ratnagiri", state: "Maharashtra", lat: 16.989543, lng: 73.284452 },
+  { name: "Bhatye Beach", district: "Ratnagiri", state: "Maharashtra", lat: 16.9743752, lng: 73.2938376 },
+  { name: "Shivkal Beach", district: "Ratnagiri", state: "Maharashtra", lat: 16.889, lng: 73.297 },
+  { name: "Ganpatipule", district: "Ratnagiri", state: "Maharashtra", lat: 17.1466952, lng: 73.2697524 },
+  { name: "Gavkhadi Beach", district: "Ratnagiri", state: "Maharashtra", lat: 16.8001247, lng: 73.3162489 },
+  { name: "Lanja", district: "Ratnagiri", state: "Maharashtra", lat: 16.8589596, lng: 73.5486886 },
+  { name: "Ganeshgule", district: "Ratnagiri", state: "Maharashtra", lat: 16.8631579, lng: 73.2958463 },
+  { name: "Velneshwar", district: "Ratnagiri", state: "Maharashtra", lat: 17.3794871, lng: 73.2140194 },
+  { name: "Kalwan", district: "Nashik", state: "Maharashtra", lat: 20.490904, lng: 74.0240765 },
+  { name: "Trimbakeshwar", district: "Nashik", state: "Maharashtra", lat: 19.9321202, lng: 73.5307549 },
+  { name: "Mahad", district: "Raigad", state: "Maharashtra", lat: 18.080753, lng: 73.42438 },
+  { name: "Ranchi", district: "Ranchi", state: "Jharkhand", lat: 23.3700501, lng: 85.3250387 },
+  { name: "Gujarat Locations", district: "Multiple districts", state: "Gujarat", lat: 22.3850051, lng: 71.745261 },
+  { name: "Ayodhya", district: "Ayodhya", state: "Uttar Pradesh", lat: 26.7990707, lng: 82.2052321 },
+  { name: "Manipur Locations", district: "Multiple districts", state: "Manipur", lat: 24.7208818, lng: 93.9229386 },
+  { name: "Shimla", district: "Shimla", state: "Himachal Pradesh", lat: 31.1040393, lng: 77.1707923 },
+  { name: "Malvan", district: "Sindhudurg", state: "Maharashtra", lat: 16.06064, lng: 73.4669499 },
+  { name: "Odisha Locations", district: "Multiple districts", state: "Odisha", lat: 20.5431241, lng: 84.6897321 },
+];
+
+const leafletMarkerIcon = L.icon({
+  iconRetinaUrl: markerIconRetinaUrl,
+  iconUrl: markerIconUrl,
+  shadowUrl: markerShadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+const indiaMapBounds = L.latLngBounds(
+  [6.5, 67.9],
+  [35.8, 97.5],
+);
+
+function LeafletLocationMap() {
+  const mapElementRef = useRef(null);
+  const mapInstanceRef = useRef(null);
+
+  useEffect(() => {
+    if (!mapElementRef.current || mapInstanceRef.current) return undefined;
+
+    const map = L.map(mapElementRef.current, {
+      center: [20.5937, 78.9629],
+      zoom: 4.75,
+      zoomControl: true,
+      zoomSnap: 0.25,
+      minZoom: 4.75,
+      maxZoom: 12,
+      maxBounds: indiaMapBounds,
+      maxBoundsViscosity: 1,
+      boxZoom: false,
+      doubleClickZoom: true,
+      keyboard: true,
+      scrollWheelZoom: true,
+      touchZoom: true,
+      wheelPxPerZoomLevel: 80,
+    });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19,
+    }).addTo(map);
+
+    installationLocations.forEach((location) => {
+      const point = [location.lat, location.lng];
+
+      L.marker(point, { icon: leafletMarkerIcon })
+        .addTo(map)
+        .bindPopup(
+          `<strong>${location.name}</strong><br>District: ${location.district}<br>State: ${location.state}`,
+        )
+        .bindTooltip(location.name);
+    });
+
+    map.fitBounds(indiaMapBounds, { padding: [4, 4] });
+    map.setMaxBounds(indiaMapBounds);
+
+    mapInstanceRef.current = map;
+    window.setTimeout(() => map.invalidateSize(), 120);
+
+    return () => {
+      map.remove();
+      mapInstanceRef.current = null;
+    };
+  }, []);
+
+  return <div className="leaflet-location-map" ref={mapElementRef} aria-label="Smart Buddy marked location map" />;
+}
+
 const navLinks = [
   ["Home", "home"],
   ["About", "about"],
@@ -407,12 +553,30 @@ const getGalleryRouteFromHash = () => /^#\/gallery\/?$/.test(window.location.has
 const getNewArrivalsRouteFromHash = () => /^#\/new-arrivals\/?$/.test(window.location.hash);
 
 function NewArrivalsPage({ onNavigateHome }) {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const activeImage = newArrivalProduct.images[activeImageIndex] ?? newArrivalProduct.images[0];
+
   return (
     <div className="new-arrivals-page">
       <section className="new-arrivals-hero">
         <div className="container new-arrivals-card">
           <div className="new-arrivals-media" data-reveal>
-            <img src={newArrivalProduct.image} alt={newArrivalProduct.title} decoding="async" />
+            <img src={activeImage.src} alt={activeImage.alt} decoding="async" />
+            <div className="new-arrivals-thumbs" aria-label="New arrival views">
+              {newArrivalProduct.images.map((image, index) => (
+                <button
+                  className={activeImageIndex === index ? "is-active" : ""}
+                  type="button"
+                  onClick={() => setActiveImageIndex(index)}
+                  aria-label={`Show ${image.label}`}
+                  aria-current={activeImageIndex === index ? "true" : undefined}
+                  key={image.src}
+                >
+                  <img src={image.src} alt="" loading="lazy" decoding="async" />
+                  <span>{image.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
           <div className="new-arrivals-copy" data-reveal>
             <span className="eyebrow"><Sparkles size={15} /> {newArrivalProduct.eyebrow}</span>
@@ -1435,47 +1599,77 @@ function App() {
               <p>Short client-side videos with simple, professional context from real project locations.</p>
             </div>
             <div className="testimonial-list" aria-label="Smart Buddy video testimonials">
-              {testimonials.map((testimonial, index) => {
-                const testimonialName = testimonial.name || testimonial.title || `Client testimonial ${index + 1}`;
-                const testimonialInitial = String(testimonialName).trim().charAt(0) || "S";
+              <div className="testimonial-marquee-track">
+                {[0, 1].map((copyIndex) => (
+                  <div className="testimonial-marquee-group" key={copyIndex}>
+                    {testimonials.map((testimonial, index) => {
+                      const testimonialName = testimonial.name || testimonial.title || `Client testimonial ${index + 1}`;
+                      const testimonialInitial = String(testimonialName).trim().charAt(0) || "S";
 
-                return (
-                  <m.article
-                    className="testimonial-card testimonial-video-card"
-                    data-reveal
-                    variants={carouselItemVariants}
-                    initial={motionInitial}
-                    animate="visible"
-                    key={testimonial.video ?? testimonialName}
-                  >
-                    <div className="testimonial-video-shell">
-                      {testimonial.video ? (
-                        <video
-                          src={testimonial.video}
-                          controls
-                          playsInline
-                          preload="metadata"
-                          poster={testimonial.poster}
-                          aria-label={`${testimonialName} video`}
-                        />
-                      ) : (
-                        <div className="testimonial-video-fallback">
-                          <PlayCircle size={28} />
-                          <span>Video testimonial</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="testimonial-context">
-                      <span className="avatar">{testimonialInitial}</span>
-                      <div>
-                        <strong>{testimonialName}</strong>
-                        <p>{testimonial.quote ?? "Smart Buddy customer feedback and project highlight."}</p>
-                        <small>{testimonial.role ?? "Client feedback"}</small>
-                      </div>
-                    </div>
-                  </m.article>
-                );
-              })}
+                      return (
+                        <m.article
+                          className="testimonial-card testimonial-video-card"
+                          data-reveal
+                          variants={carouselItemVariants}
+                          initial={motionInitial}
+                          animate="visible"
+                          key={`${copyIndex}-${testimonial.video ?? testimonialName}`}
+                        >
+                          <div className="testimonial-video-shell">
+                            {testimonial.video ? (
+                              <video
+                                src={testimonial.video}
+                                controls
+                                playsInline
+                                preload="metadata"
+                                poster={testimonial.poster}
+                                aria-label={`${testimonialName} video`}
+                              />
+                            ) : (
+                              <div className="testimonial-video-fallback">
+                                <PlayCircle size={28} />
+                                <span>Video testimonial</span>
+                              </div>
+                            )}
+                          </div>
+                          <div className="testimonial-context">
+                            <span className="avatar">{testimonialInitial}</span>
+                            <div>
+                              <strong>{testimonialName}</strong>
+                              <p>{testimonial.quote ?? "Smart Buddy customer feedback and project highlight."}</p>
+                              <small>{testimonial.role ?? "Client feedback"}</small>
+                            </div>
+                          </div>
+                        </m.article>
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section installation-map" aria-labelledby="installation-map-title">
+          <div className="container">
+            <div className="installation-map-heading" data-reveal>
+              <span className="eyebrow"><MapPin size={15} /> Installed toilet locations</span>
+              <h2 id="installation-map-title">Location-wise Smart Buddy installation points.</h2>
+              <p>Leaflet map view of the same locations from the previous installation map.</p>
+            </div>
+            <div className="installation-map-layout" data-reveal>
+              <div className="leaflet-map-shell">
+                <LeafletLocationMap />
+              </div>
+              <div className="installation-location-list" aria-label="Installed toilet location names">
+                {installationLocations.map((location) => (
+                  <span key={`${location.name}-${location.district}-${location.state}`}>
+                    <MapPin size={14} />
+                    <strong>{location.name}</strong>
+                    <small>{location.district}, {location.state}</small>
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </section>
