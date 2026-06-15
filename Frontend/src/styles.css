@@ -3202,13 +3202,50 @@ h1 {
   box-shadow: 0 12px 24px rgba(1, 39, 31, 0.12);
 }
 
-.testimonial-video-shell video {
+.testimonial-video-trigger {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  color: #fff;
+  border: 0;
+  background: #052f28;
+  text-align: center;
+}
+
+.testimonial-video-trigger img {
   display: block;
   width: 100%;
   aspect-ratio: 9 / 16;
   max-height: 315px;
   background: #052f28;
   object-fit: cover;
+}
+
+.testimonial-video-trigger span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(5, 47, 40, 0.08), rgba(5, 47, 40, 0.62));
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.testimonial-video-trigger svg {
+  color: #d2f38b;
+  filter: drop-shadow(0 8px 18px rgba(1, 39, 31, 0.34));
+}
+
+.testimonial-video-trigger:hover span,
+.testimonial-video-trigger:focus-visible span {
+  background: linear-gradient(180deg, rgba(5, 47, 40, 0.12), rgba(5, 47, 40, 0.76));
 }
 
 .testimonial-video-fallback {
@@ -3674,9 +3711,11 @@ footer {
 
 .installation-map-layout {
   display: grid;
-  grid-template-columns: minmax(340px, 0.9fr) minmax(0, 1.1fr);
-  gap: 24px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
   align-items: stretch;
+  max-width: 1120px;
+  margin: 0 auto;
 }
 
 .installation-map-visual {
@@ -3910,9 +3949,11 @@ footer {
 
 .installation-location-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 10px;
   align-content: start;
+  max-height: 260px;
+  overflow-y: auto;
   padding: 20px;
   border: 1px solid rgba(8, 125, 97, 0.13);
   border-radius: 8px;
@@ -3957,7 +3998,9 @@ footer {
 
 .leaflet-map-shell {
   width: 100%;
-  min-height: 440px;
+  min-width: 0;
+  height: clamp(360px, 48vw, 560px);
+  min-height: 360px;
   overflow: hidden;
   border: 1px solid rgba(16, 35, 30, 0.12);
   border-radius: 7px;
@@ -3965,9 +4008,36 @@ footer {
   box-shadow: 0 18px 46px rgba(27, 60, 52, 0.11);
 }
 
+.deferred-map-frame,
+.map-fallback {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+.map-fallback {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 10px;
+  color: rgba(16, 35, 30, 0.62);
+  background:
+    linear-gradient(90deg, rgba(8, 125, 97, 0.045) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(8, 125, 97, 0.04) 1px, transparent 1px),
+    #e8eee6;
+  background-size: 62px 62px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.map-fallback svg {
+  color: var(--green);
+}
+
 .leaflet-location-map {
   width: 100%;
   height: 100%;
+  min-height: 100%;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -3999,16 +4069,13 @@ footer {
 }
 
 @media (max-width: 980px) {
-  .installation-map-layout {
-    grid-template-columns: 1fr;
-  }
-
   .installation-map-visual {
     min-height: 430px;
   }
 
   .leaflet-map-shell {
-    min-height: 380px;
+    height: 420px;
+    min-height: 420px;
   }
 }
 
@@ -4031,7 +4098,8 @@ footer {
   }
 
   .leaflet-map-shell {
-    min-height: 300px;
+    height: 330px;
+    min-height: 330px;
   }
 
   .installation-state-map {
@@ -4067,8 +4135,9 @@ footer {
   }
 
   .installation-location-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 8px;
+    max-height: 300px;
     padding: 12px;
   }
 
@@ -4903,6 +4972,16 @@ textarea:focus-visible {
 
 .page-transition {
   min-height: 100%;
+}
+
+.route-fallback {
+  display: grid;
+  min-height: 54vh;
+  place-items: center;
+  color: var(--muted);
+  background: var(--cream);
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .hero-backgrounds {
@@ -6069,7 +6148,7 @@ textarea:focus-visible {
     padding: 14px;
   }
 
-  .testimonial-video-shell video {
+  .testimonial-video-trigger img {
     max-height: 360px;
   }
 

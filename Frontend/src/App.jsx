@@ -1,9 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
-import L from "leaflet";
-import markerIconRetinaUrl from "leaflet/dist/images/marker-icon-2x.png";
-import markerIconUrl from "leaflet/dist/images/marker-icon.png";
-import markerShadowUrl from "leaflet/dist/images/marker-shadow.png";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -35,11 +31,7 @@ import {
   Wrench,
   X,
 } from "lucide-react";
-import AboutPage from "./AboutPage.jsx";
-import AchievementPage from "./AchievementPage.jsx";
-import ClientPage, { clientRecords } from "./ClientPage.jsx";
-import GalleryPage from "./GalleryPage.jsx";
-import ProductPage from "./ProductPage.jsx";
+import { clientRecords } from "./clientRecords.js";
 import { productPages, productPageList } from "./productPages.js";
 import {
   carouselItemVariants,
@@ -51,6 +43,13 @@ import {
   pageTransitionVariants,
   viewportOnce,
 } from "./utils/animations.js";
+
+const AboutPage = lazy(() => import("./AboutPage.jsx"));
+const AchievementPage = lazy(() => import("./AchievementPage.jsx"));
+const ClientPage = lazy(() => import("./ClientPage.jsx"));
+const GalleryPage = lazy(() => import("./GalleryPage.jsx"));
+const ProductPage = lazy(() => import("./ProductPage.jsx"));
+const LeafletLocationMap = lazy(() => import("./LeafletLocationMap.jsx"));
 
 const getCountParts = (value) => {
   const match = value.match(/(\d+)/);
@@ -106,7 +105,7 @@ function WhatsAppIcon({ size = 22 }) {
   );
 }
 
-const heroBackgroundImage = "/media/hero/smartbuddy-abstract-green-hero-bg.png";
+const heroBackgroundImage = "/media/hero/smartbuddy-abstract-green-hero-bg-lite.jpg";
 
 const heroSlides = [
   {
@@ -195,6 +194,7 @@ const products = [
     tag: "Smart sanitation",
     accent: "blue",
     image: "/media/products/electronic-eco-toilet-new.png",
+    thumb: "/media/products/thumbs/electronic-eco-toilet-new-thumb.jpg",
     pageSlug: "electronic-eco-toilet",
     features: ["Water saving", "IoT monitoring and SMS intimation", "24x7 surveillance with voice assistance"],
   },
@@ -206,6 +206,7 @@ const products = [
     tag: "Waste treatment",
     accent: "teal",
     image: "/media/products/bio-digester-new.png",
+    thumb: "/media/products/thumbs/bio-digester-new-thumb.jpg",
     pageSlug: "bio-digester",
     features: ["No sewerage network or STP", "Pathogen reduction above 99%", "No de-sludging or moving parts"],
   },
@@ -217,6 +218,7 @@ const products = [
     tag: "Composting",
     accent: "lime",
     image: "/media/products/organic-waste-composter-new.png",
+    thumb: "/media/products/thumbs/organic-waste-composter-new-thumb.jpg",
     pageSlug: "organic-waste-composter",
     features: ["25 to 2000 kg/day models", "No noise and no odour", "Fully automatic yet compact"],
   },
@@ -228,6 +230,7 @@ const products = [
     tag: "Recycling",
     accent: "orange",
     image: "/media/products/pet-bottle-rvm-new.png",
+    thumb: "/media/products/thumbs/pet-bottle-rvm-new-thumb.jpg",
     pageSlug: "pet-bottle-shredder",
     features: ["21 inch touch screen", "E-wallet cashback", "24x7 live machine tracking"],
   },
@@ -239,6 +242,7 @@ const products = [
     tag: "Digital access",
     accent: "violet",
     image: "/media/products/computer-health-kiosk-new.png",
+    thumb: "/media/products/thumbs/computer-health-kiosk-new-thumb.jpg",
     pageSlug: "computer-kiosk",
     features: ["Special purpose machine", "Configurable kiosk format", "Smart Buddy product family"],
   },
@@ -252,6 +256,7 @@ const solutionJourneys = [
     pageSlug: "electronic-eco-toilet",
     icon: Droplets,
     image: "/media/products/electronic-eco-toilet-new.png",
+    thumb: "/media/products/thumbs/electronic-eco-toilet-new-thumb.jpg",
     points: ["Self-cleaning", "IoT-ready", "Water conscious"],
   },
   {
@@ -261,6 +266,7 @@ const solutionJourneys = [
     pageSlug: "bio-digester",
     icon: Leaf,
     image: "/media/products/bio-digester-new.png",
+    thumb: "/media/products/thumbs/bio-digester-new-thumb.jpg",
     points: ["No STP dependency", "Low maintenance", "Zero-waste process"],
   },
   {
@@ -270,6 +276,7 @@ const solutionJourneys = [
     pageSlug: "organic-waste-composter",
     icon: Wind,
     image: "/media/products/organic-waste-composter-new.png",
+    thumb: "/media/products/thumbs/organic-waste-composter-new-thumb.jpg",
     points: ["24-36 hours", "Odour controlled", "Scalable capacity"],
   },
   {
@@ -279,6 +286,7 @@ const solutionJourneys = [
     pageSlug: "pet-bottle-shredder",
     icon: Store,
     image: "/media/products/pet-bottle-rvm-new.png",
+    thumb: "/media/products/thumbs/pet-bottle-rvm-new-thumb.jpg",
     points: ["Touch screen", "Cashback ready", "Live tracking"],
   },
   {
@@ -288,6 +296,7 @@ const solutionJourneys = [
     pageSlug: "computer-kiosk",
     icon: Monitor,
     image: "/media/products/computer-health-kiosk-new.png",
+    thumb: "/media/products/thumbs/computer-health-kiosk-new-thumb.jpg",
     points: ["Configurable", "Public-use format", "Service access"],
   },
 ];
@@ -461,76 +470,6 @@ const installationLocations = [
   { name: "Odisha Locations", district: "Multiple districts", state: "Odisha", lat: 20.5431241, lng: 84.6897321 },
 ];
 
-const leafletMarkerIcon = L.icon({
-  iconRetinaUrl: markerIconRetinaUrl,
-  iconUrl: markerIconUrl,
-  shadowUrl: markerShadowUrl,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-
-const indiaMapBounds = L.latLngBounds(
-  [6.5, 67.9],
-  [35.8, 97.5],
-);
-
-function LeafletLocationMap() {
-  const mapElementRef = useRef(null);
-  const mapInstanceRef = useRef(null);
-
-  useEffect(() => {
-    if (!mapElementRef.current || mapInstanceRef.current) return undefined;
-
-    const map = L.map(mapElementRef.current, {
-      center: [20.5937, 78.9629],
-      zoom: 4.75,
-      zoomControl: true,
-      zoomSnap: 0.25,
-      minZoom: 4.75,
-      maxZoom: 12,
-      maxBounds: indiaMapBounds,
-      maxBoundsViscosity: 1,
-      boxZoom: false,
-      doubleClickZoom: true,
-      keyboard: true,
-      scrollWheelZoom: true,
-      touchZoom: true,
-      wheelPxPerZoomLevel: 80,
-    });
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 19,
-    }).addTo(map);
-
-    installationLocations.forEach((location) => {
-      const point = [location.lat, location.lng];
-
-      L.marker(point, { icon: leafletMarkerIcon })
-        .addTo(map)
-        .bindPopup(
-          `<strong>${location.name}</strong><br>District: ${location.district}<br>State: ${location.state}`,
-        )
-        .bindTooltip(location.name);
-    });
-
-    map.fitBounds(indiaMapBounds, { padding: [4, 4] });
-    map.setMaxBounds(indiaMapBounds);
-
-    mapInstanceRef.current = map;
-    window.setTimeout(() => map.invalidateSize(), 120);
-
-    return () => {
-      map.remove();
-      mapInstanceRef.current = null;
-    };
-  }, []);
-
-  return <div className="leaflet-location-map" ref={mapElementRef} aria-label="Smart Buddy marked location map" />;
-}
-
 const navLinks = [
   ["Home", "home"],
   ["About", "about"],
@@ -551,6 +490,63 @@ const getAboutRouteFromHash = () => /^#\/about\/?$/.test(window.location.hash);
 const getAchievementRouteFromHash = () => /^#\/achievements\/?$/.test(window.location.hash);
 const getGalleryRouteFromHash = () => /^#\/gallery\/?$/.test(window.location.hash);
 const getNewArrivalsRouteFromHash = () => /^#\/new-arrivals\/?$/.test(window.location.hash);
+
+function RouteFallback() {
+  return (
+    <div className="route-fallback" role="status" aria-live="polite">
+      Loading page...
+    </div>
+  );
+}
+
+function MapFallback({ text = "Loading installation map..." }) {
+  return (
+    <div className="map-fallback" role="status" aria-live="polite">
+      <MapPin size={18} />
+      <span>{text}</span>
+    </div>
+  );
+}
+
+function DeferredLeafletLocationMap({ locations }) {
+  const frameRef = useRef(null);
+  const [shouldLoadMap, setShouldLoadMap] = useState(false);
+
+  useEffect(() => {
+    if (shouldLoadMap) return undefined;
+
+    const frame = frameRef.current;
+    if (!frame || !("IntersectionObserver" in window)) {
+      setShouldLoadMap(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "620px 0px" },
+    );
+
+    observer.observe(frame);
+    return () => observer.disconnect();
+  }, [shouldLoadMap]);
+
+  return (
+    <div className="deferred-map-frame" ref={frameRef}>
+      {shouldLoadMap ? (
+        <Suspense fallback={<MapFallback />}>
+          <LeafletLocationMap locations={locations} />
+        </Suspense>
+      ) : (
+        <MapFallback text="Map loads as you scroll" />
+      )}
+    </div>
+  );
+}
 
 function NewArrivalsPage({ onNavigateHome }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -641,62 +637,77 @@ function App() {
   const motionInitial = prefersReducedMotion ? false : "hidden";
 
   useEffect(() => {
-    let progressTimer;
-    let finishTimer;
     let removeTimer;
-    const duration = 2200;
-    const startTime = window.performance.now();
-
-    const easeOutQuart = (value) => 1 - Math.pow(1 - value, 4);
-
-    const updateProgress = () => {
-      const elapsed = window.performance.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const nextProgress = Math.min(96, Math.round(easeOutQuart(progress) * 96));
-      setLoaderProgress(nextProgress);
-
-      if (progress >= 1) {
-        window.clearInterval(progressTimer);
-        setLoaderProgress(100);
-        finishTimer = window.setTimeout(() => {
-          setSiteLoading(false);
-          removeTimer = window.setTimeout(() => setLoaderVisible(false), 700);
-        }, 180);
-      }
-    };
-
-    progressTimer = window.setInterval(updateProgress, 80);
-    updateProgress();
+    const frameId = window.requestAnimationFrame(() => {
+      setLoaderProgress(100);
+      setSiteLoading(false);
+      removeTimer = window.setTimeout(() => setLoaderVisible(false), 320);
+    });
 
     return () => {
-      window.clearInterval(progressTimer);
-      window.clearTimeout(finishTimer);
+      window.cancelAnimationFrame(frameId);
       window.clearTimeout(removeTimer);
     };
   }, []);
 
   useEffect(() => {
+    if (
+      prefersReducedMotion ||
+      activeProductSlug ||
+      activeClientPage ||
+      activeAboutPage ||
+      activeAchievementPage ||
+      activeGalleryPage ||
+      activeNewArrivalsPage
+    ) {
+      return undefined;
+    }
+
     const timer = window.setInterval(() => {
       setHeroIndex((current) => (current + 1) % heroSlides.length);
     }, 6500);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [activeAboutPage, activeAchievementPage, activeClientPage, activeGalleryPage, activeNewArrivalsPage, activeProductSlug, prefersReducedMotion]);
 
   useEffect(() => {
+    if (
+      prefersReducedMotion ||
+      activeProductSlug ||
+      activeClientPage ||
+      activeAboutPage ||
+      activeAchievementPage ||
+      activeGalleryPage ||
+      activeNewArrivalsPage
+    ) {
+      return undefined;
+    }
+
     const timer = window.setInterval(() => {
       setFeaturedImageIndex((current) => (current + 1) % heroFeaturedImages.length);
     }, 4300);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [activeAboutPage, activeAchievementPage, activeClientPage, activeGalleryPage, activeNewArrivalsPage, activeProductSlug, prefersReducedMotion]);
 
   useEffect(() => {
+    let ticking = false;
+
     const onScroll = () => {
-      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-      setScrolled(window.scrollY > 20);
-      setScrollProgress(scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0);
+      if (ticking) return;
+
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const nextScrolled = window.scrollY > 20;
+        const nextProgress = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0;
+
+        setScrolled((current) => (current === nextScrolled ? current : nextScrolled));
+        setScrollProgress((current) => (Math.abs(current - nextProgress) < 0.35 ? current : nextProgress));
+        ticking = false;
+      });
     };
+
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [activeProductSlug, activeClientPage, activeAboutPage, activeAchievementPage, activeGalleryPage, activeNewArrivalsPage]);
 
@@ -1189,6 +1200,7 @@ function App() {
             animate="visible"
             exit={prefersReducedMotion ? undefined : "exit"}
           >
+            <Suspense fallback={<RouteFallback />}>
             {activeProductPage ? (
               <ProductPage
                 product={activeProductPage}
@@ -1292,7 +1304,7 @@ function App() {
                     onClick={() => navigateToProduct(product.pageSlug)}
                     key={product.title}
                   >
-                    <img src={product.image} alt="" loading="lazy" decoding="async" />
+                    <img src={product.thumb ?? product.image} alt="" loading="lazy" decoding="async" />
                     <strong>{product.title}</strong>
                     <ArrowRight size={16} />
                   </button>
@@ -1409,7 +1421,7 @@ function App() {
                         </div>
                       </div>
                       <div className="solution-journey-media">
-                        <img src={journey.image} alt="" loading="lazy" decoding="async" />
+                        <img src={journey.thumb ?? journey.image} alt="" loading="lazy" decoding="async" />
                       </div>
                       <span className="solution-journey-action" aria-hidden="true">
                         <ArrowRight size={17} />
@@ -1617,14 +1629,25 @@ function App() {
                         >
                           <div className="testimonial-video-shell">
                             {testimonial.video ? (
-                              <video
-                                src={testimonial.video}
-                                controls
-                                playsInline
-                                preload="metadata"
-                                poster={testimonial.poster}
-                                aria-label={`${testimonialName} video`}
-                              />
+                              <button
+                                className="testimonial-video-trigger"
+                                type="button"
+                                onClick={() => setSelectedMedia({
+                                  title: testimonialName,
+                                  category: testimonial.role ?? "Video testimonial",
+                                  src: testimonial.video,
+                                  alt: testimonialName,
+                                  type: "video",
+                                  poster: testimonial.poster,
+                                })}
+                                aria-label={`Play ${testimonialName} video`}
+                              >
+                                <img src={testimonial.poster} alt="" loading="lazy" decoding="async" />
+                                <span>
+                                  <PlayCircle size={30} />
+                                  Play
+                                </span>
+                              </button>
                             ) : (
                               <div className="testimonial-video-fallback">
                                 <PlayCircle size={28} />
@@ -1659,7 +1682,7 @@ function App() {
             </div>
             <div className="installation-map-layout" data-reveal>
               <div className="leaflet-map-shell">
-                <LeafletLocationMap />
+                <DeferredLeafletLocationMap locations={installationLocations} />
               </div>
               <div className="installation-location-list" aria-label="Installed toilet location names">
                 {installationLocations.map((location) => (
@@ -1724,6 +1747,7 @@ function App() {
         </section>
               </>
             )}
+            </Suspense>
           </m.div>
         </AnimatePresence>
       </main>
@@ -1809,7 +1833,7 @@ function App() {
           <article className="media-modal" role="dialog" aria-modal="true" aria-labelledby="media-title" onMouseDown={(event) => event.stopPropagation()}>
             <button className="modal-close" onClick={() => setSelectedMedia(null)} aria-label="Close media viewer"><X /></button>
             {selectedMedia.type === "video" ? (
-              <video src={selectedMedia.src} poster={selectedMedia.poster} controls autoPlay playsInline />
+              <video src={selectedMedia.src} poster={selectedMedia.poster} controls autoPlay playsInline preload="metadata" />
             ) : (
               <img src={selectedMedia.src} alt={selectedMedia.alt} loading="lazy" decoding="async" />
             )}
