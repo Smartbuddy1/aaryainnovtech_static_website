@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-labelledby="title desc">
+  <title id="title">Dinesh Bachhav</title>
+  <desc id="desc">Placeholder profile image for Dinesh Bachhav, Vice President Operations.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f8066" />
+      <stop offset="1" stop-color="#17499d" />
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="1" stop-color="#d2f38b" stop-opacity="0.9" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)" />
+  <circle cx="200" cy="164" r="78" fill="rgba(255,255,255,0.16)" />
+  <circle cx="200" cy="164" r="68" fill="none" stroke="url(#ring)" stroke-width="5" />
+  <text x="200" y="184" fill="#ffffff" font-family="Cambria, Georgia, serif" font-size="58" font-weight="700" text-anchor="middle">DB</text>
+  <path d="M94 360c16-65 56-98 106-98s90 33 106 98" fill="rgba(255,255,255,0.2)" />
+  <path d="M112 360c17-48 49-72 88-72s71 24 88 72" fill="#12342d" opacity="0.72" />
+  <text x="200" y="338" fill="#ffffff" font-family="Cambria, Georgia, serif" font-size="21" font-weight="700" text-anchor="middle">VP Operations</text>
+</svg>

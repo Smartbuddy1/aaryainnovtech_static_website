@@ -31,6 +31,34 @@ const directors = [
     email: "info@smartbuddy.com",
     note: "Guides operations, government tenders, finance, automation, and R&D coordination.",
   },
+  {
+    name: "Satyajit Nahire",
+    role: "Chief Operating Officer (COO)",
+    company: "Aarya Innovtech Pvt. Ltd.",
+    image: "/media/about/satyajit-nahire.png",
+    imageCandidates: [
+      "/media/about/satyajit-nahire.png",
+      "/media/about/satyajit-nahire.svg",
+    ],
+    fallbackImage: "/media/about/satyajit-nahire.svg",
+    email: "coo@smartbuddy.co.in",
+    note: "Supports operations leadership, execution coordination, and delivery discipline across Smart Buddy projects.",
+  },
+  {
+    name: "Dinesh Bachhav",
+    role: "Vice President, Operations",
+    company: "Aarya Innovtech Pvt. Ltd.",
+    image: "/media/about/dinesh-bachhav.png",
+    imageCandidates: [
+      "/media/about/dinesh-bachhav.png",
+      "/media/about/dinesh-bachhav.jpeg",
+      "/media/about/dinesh-bachhav.jpg",
+      "/media/about/dinesh-bachhav.svg",
+    ],
+    fallbackImage: "/media/about/dinesh-bachhav.svg",
+    email: "operations@smartbuddy.co.in",
+    note: "Leads operations coordination, production follow-through, and execution support for Smart Buddy deployments.",
+  },
 ];
 
 const profileCards = [
@@ -167,21 +195,38 @@ function AboutPage({ onNavigateHome }) {
         <div className="container">
           <div className="section-heading" data-reveal>
             <em>Leadership</em>
-            <h2>Directors</h2>
+            <h2>Directors & Chief Operating Officer</h2>
             <p>Aarya Innovtech Pvt. Ltd.</p>
           </div>
           <div className="about-leadership-list">
             {directors.map((director, index) => (
               <article className="about-director-card compact" data-reveal style={{ "--reveal-delay": `${index * 70}ms` }} key={director.name}>
-                <img src={director.image} alt={director.name} loading="lazy" decoding="async" />
+                <img
+                  src={director.image}
+                  alt={director.name}
+                  loading="lazy"
+                  decoding="async"
+                  onError={(event) => {
+                    const candidates = director.imageCandidates ?? [director.fallbackImage].filter(Boolean);
+                    const currentIndex = Number(event.currentTarget.dataset.imageCandidateIndex ?? 0);
+                    const nextImage = candidates[currentIndex + 1];
+
+                    if (nextImage) {
+                      event.currentTarget.dataset.imageCandidateIndex = String(currentIndex + 1);
+                      event.currentTarget.src = nextImage;
+                    }
+                  }}
+                />
                 <div className="about-director-caption compact">
                   <span>{director.role}</span>
                   <h2>{director.name}</h2>
                   <strong>{director.company}</strong>
                   <p>{director.note}</p>
-                  <div className="about-director-links">
-                    <a href={`mailto:${director.email}`}><Mail size={14} /> {director.email}</a>
-                  </div>
+                  {director.email && (
+                    <div className="about-director-links">
+                      <a href={`mailto:${director.email}`}><Mail size={14} /> {director.email}</a>
+                    </div>
+                  )}
                 </div>
               </article>
             ))}
