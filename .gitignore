@@ -1,0 +1,7 @@
+.chrome-gallery-profile
+.wrangler/
+node_modules/
+Frontend/node_modules/
+Frontend/dist/
+*.log
+*-check.png

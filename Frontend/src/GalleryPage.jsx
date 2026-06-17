@@ -16,26 +16,22 @@ const galleryPath = (section, file) => `/media/gallery/${section}/${file}`;
 const gallerySections = [
   {
     id: "featured-videos",
-    eyebrow: "Featured videos",
-    title: "Smart Buddy video highlights",
-    summary: "Priority videos covering the Smart Buddy product portfolio, engineering work, and award recognition.",
+    eyebrow: "Featured highlights",
+    title: "Smart Buddy visual highlights",
+    summary: "Priority visuals covering the Smart Buddy product portfolio, engineering work, and award recognition.",
     icon: PlayCircle,
     images: [
       {
-        src: galleryPath("featured-videos", "smart-buddy-company-portfolio.mp4"),
-        poster: galleryPath("featured-videos", "smart-buddy-company-portfolio-poster.jpg"),
+        src: galleryPath("featured-videos", "smart-buddy-company-portfolio-poster.jpg"),
         title: "Smart Buddy company portfolio reel",
         alt: "Smart Buddy company portfolio video opening with the Smart Buddy brand and engineering message",
         size: "wide",
-        type: "video",
       },
       {
-        src: galleryPath("featured-videos", "udyog-janani-kamal-puraskar-2017.mp4"),
-        poster: galleryPath("featured-videos", "udyog-janani-kamal-puraskar-2017-poster.jpg"),
+        src: galleryPath("featured-videos", "udyog-janani-kamal-puraskar-2017-poster.jpg"),
         title: "Udyog Janani Kamal Puraskar 2017 recognition",
         alt: "Smart Buddy award recognition video with product demonstration work",
         size: "wide",
-        type: "video",
       },
     ],
   },
