@@ -3,5 +3,7 @@
 node_modules/
 Frontend/node_modules/
 Frontend/dist/
+Frontend/client/
+Frontend/public/client/
 *.log
 *-check.png
