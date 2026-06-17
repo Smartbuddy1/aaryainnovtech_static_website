@@ -3,7 +3,16 @@
 node_modules/
 Frontend/node_modules/
 Frontend/dist/
+Frontend/css/
+Frontend/fonts/
+Frontend/images/
+Frontend/js/
 Frontend/client/
 Frontend/public/client/
+Frontend/about-*.png
+Frontend/client-contact-sheet*.png
+Frontend/clients-page.png
+Frontend/hero-home*.png
+Frontend/nav-check*.png
 *.log
 *-check.png
