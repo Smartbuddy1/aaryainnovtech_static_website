@@ -167,49 +167,6 @@ img {
   backdrop-filter: blur(18px);
 }
 
-.topline {
-  color: rgba(255, 255, 255, 0.78);
-  background: rgba(6, 48, 40, 0.84);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  transition: 250ms ease;
-}
-
-.site-header.is-scrolled .topline {
-  background: #073f33;
-}
-
-.topline-inner,
-.topline-links,
-.topline-links a {
-  display: flex;
-  align-items: center;
-}
-
-.topline-inner {
-  justify-content: space-between;
-  min-height: 34px;
-}
-
-.topline-inner p {
-  margin: 0;
-}
-
-.topline-links {
-  gap: 20px;
-}
-
-.topline-links a {
-  gap: 6px;
-  transition: color 180ms ease;
-}
-
-.topline-links a:hover {
-  color: #fff;
-}
-
 .mobile-phone {
   display: none;
 }
@@ -3530,6 +3487,143 @@ h1 {
   font-weight: 700;
 }
 
+.privacy-page {
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.privacy-page-hero {
+  position: relative;
+  padding: 142px 0 72px;
+  overflow: hidden;
+  color: #fff;
+  background:
+    linear-gradient(135deg, rgba(4, 52, 44, 0.96), rgba(6, 73, 59, 0.94)),
+    url("/media/hero/smartbuddy-home-park-installation.jpeg") center / cover;
+}
+
+.privacy-page-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: 40px;
+  align-items: end;
+}
+
+.privacy-page-copy h1 {
+  margin: 14px 0 14px;
+  color: #fff;
+  font-size: clamp(38px, 4vw, 54px);
+  letter-spacing: 0;
+  line-height: 1.08;
+}
+
+.privacy-page-copy p {
+  max-width: 670px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.privacy-page-note {
+  display: grid;
+  gap: 10px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(14px);
+}
+
+.privacy-page-note svg {
+  color: var(--lime);
+}
+
+.privacy-page-note strong {
+  color: #fff;
+  font-size: 18px;
+}
+
+.privacy-page-note p,
+.privacy-page-note span {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.privacy-page-note span {
+  color: #d2f38b;
+  font-weight: 800;
+}
+
+.privacy-policy-body {
+  background:
+    linear-gradient(180deg, #f7faf6 0%, #fff 100%);
+}
+
+.privacy-policy-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.privacy-policy-card {
+  display: grid;
+  gap: 12px;
+  min-height: 210px;
+  padding: 24px;
+  border: 1px solid rgba(16, 35, 30, 0.1);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(27, 60, 52, 0.06);
+}
+
+.privacy-policy-card svg {
+  color: var(--green);
+}
+
+.privacy-policy-card h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 19px;
+  letter-spacing: 0;
+}
+
+.privacy-policy-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.privacy-policy-contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 14px;
+  align-items: center;
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid rgba(16, 35, 30, 0.1);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(27, 60, 52, 0.06);
+}
+
+.privacy-policy-contact h2 {
+  margin: 8px 0 4px;
+  font-size: 26px;
+  letter-spacing: 0;
+}
+
+.privacy-policy-contact p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
 footer {
   color: rgba(255, 255, 255, 0.67);
   background: #062d27;
@@ -3654,6 +3748,14 @@ footer {
   margin: 0;
   color: rgba(255, 255, 255, 0.45);
   font-size: 12px;
+}
+
+.footer-bottom-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+  flex-wrap: wrap;
 }
 
 .footer-bottom button {
@@ -5304,17 +5406,9 @@ textarea:focus-visible {
 }
 
 @media (max-width: 980px) {
-  .topline-inner > p {
-    display: none;
-  }
-
-  .topline-inner {
-    justify-content: flex-end;
-  }
-
   .nav-links {
     position: fixed;
-    top: 116px;
+    top: 76px;
     right: 0;
     left: 0;
     display: grid;
@@ -5542,22 +5636,6 @@ textarea:focus-visible {
     width: min(100% - 32px, 620px);
   }
 
-  .topline-inner {
-    justify-content: center;
-  }
-
-  .topline {
-    font-size: 10px;
-    letter-spacing: 0.01em;
-    text-transform: none;
-  }
-
-  .topline-links {
-    width: 100%;
-    justify-content: center;
-    gap: 12px;
-  }
-
   .desktop-phone {
     display: none;
   }
@@ -5575,7 +5653,7 @@ textarea:focus-visible {
   }
 
   .nav-links {
-    top: 104px;
+    top: 70px;
   }
 
   .hero,
@@ -10002,5 +10080,55 @@ h1 {
   .gallery-page-card.is-large,
   .gallery-page-card.is-portrait {
     aspect-ratio: 4 / 5;
+  }
+}
+
+@media (max-width: 980px) {
+  .privacy-page-hero {
+    padding: 132px 0 62px;
+  }
+
+  .privacy-page-hero-grid,
+  .privacy-policy-contact {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .privacy-page-note {
+    max-width: 420px;
+  }
+
+  .privacy-policy-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .privacy-page-hero {
+    padding: 124px 0 54px;
+  }
+
+  .privacy-page-copy h1 {
+    font-size: 32px;
+  }
+
+  .privacy-page-copy p,
+  .privacy-policy-card p {
+    font-size: 14px;
+  }
+
+  .privacy-page-note,
+  .privacy-policy-card,
+  .privacy-policy-contact {
+    padding: 18px;
+  }
+
+  .privacy-policy-contact .button {
+    width: 100%;
+  }
+
+  .footer-bottom-actions {
+    justify-content: flex-start;
+    gap: 10px 16px;
   }
 }

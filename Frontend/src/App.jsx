@@ -49,6 +49,7 @@ const AchievementPage = lazy(() => import("./AchievementPage.jsx"));
 const ClientPage = lazy(() => import("./ClientPage.jsx"));
 const GalleryPage = lazy(() => import("./GalleryPage.jsx"));
 const ProductPage = lazy(() => import("./ProductPage.jsx"));
+const PrivacyPolicyPage = lazy(() => import("./PrivacyPolicyPage.jsx"));
 const LeafletLocationMap = lazy(() => import("./LeafletLocationMap.jsx"));
 
 const getCountParts = (value) => {
@@ -105,6 +106,7 @@ function WhatsAppIcon({ size = 22 }) {
   );
 }
 
+const smartBuddyLogo = "/images/smart-buddy-logo.png";
 const heroBackgroundImage = "/media/hero/smartbuddy-abstract-green-hero-bg-lite.jpg";
 
 const heroSlides = [
@@ -490,6 +492,7 @@ const getAboutRouteFromHash = () => /^#\/about\/?$/.test(window.location.hash);
 const getAchievementRouteFromHash = () => /^#\/achievements\/?$/.test(window.location.hash);
 const getGalleryRouteFromHash = () => /^#\/gallery\/?$/.test(window.location.hash);
 const getNewArrivalsRouteFromHash = () => /^#\/new-arrivals\/?$/.test(window.location.hash);
+const getPrivacyPolicyRouteFromHash = () => /^#\/privacy-policy\/?$/.test(window.location.hash);
 
 function RouteFallback() {
   return (
@@ -602,6 +605,7 @@ function App() {
   const [activeAchievementPage, setActiveAchievementPage] = useState(() => getAchievementRouteFromHash());
   const [activeGalleryPage, setActiveGalleryPage] = useState(() => getGalleryRouteFromHash());
   const [activeNewArrivalsPage, setActiveNewArrivalsPage] = useState(() => getNewArrivalsRouteFromHash());
+  const [activePrivacyPolicyPage, setActivePrivacyPolicyPage] = useState(() => getPrivacyPolicyRouteFromHash());
   const [heroIndex, setHeroIndex] = useState(0);
   const [featuredImageIndex, setFeaturedImageIndex] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -633,7 +637,9 @@ function App() {
             ? "gallery"
             : activeNewArrivalsPage
               ? "new-arrivals"
-              : "home";
+              : activePrivacyPolicyPage
+                ? "privacy-policy"
+                : "home";
   const motionInitial = prefersReducedMotion ? false : "hidden";
 
   useEffect(() => {
@@ -658,7 +664,8 @@ function App() {
       activeAboutPage ||
       activeAchievementPage ||
       activeGalleryPage ||
-      activeNewArrivalsPage
+      activeNewArrivalsPage ||
+      activePrivacyPolicyPage
     ) {
       return undefined;
     }
@@ -667,7 +674,7 @@ function App() {
       setHeroIndex((current) => (current + 1) % heroSlides.length);
     }, 6500);
     return () => window.clearInterval(timer);
-  }, [activeAboutPage, activeAchievementPage, activeClientPage, activeGalleryPage, activeNewArrivalsPage, activeProductSlug, prefersReducedMotion]);
+  }, [activeAboutPage, activeAchievementPage, activeClientPage, activeGalleryPage, activeNewArrivalsPage, activePrivacyPolicyPage, activeProductSlug, prefersReducedMotion]);
 
   useEffect(() => {
     if (
@@ -677,7 +684,8 @@ function App() {
       activeAboutPage ||
       activeAchievementPage ||
       activeGalleryPage ||
-      activeNewArrivalsPage
+      activeNewArrivalsPage ||
+      activePrivacyPolicyPage
     ) {
       return undefined;
     }
@@ -686,7 +694,7 @@ function App() {
       setFeaturedImageIndex((current) => (current + 1) % heroFeaturedImages.length);
     }, 4300);
     return () => window.clearInterval(timer);
-  }, [activeAboutPage, activeAchievementPage, activeClientPage, activeGalleryPage, activeNewArrivalsPage, activeProductSlug, prefersReducedMotion]);
+  }, [activeAboutPage, activeAchievementPage, activeClientPage, activeGalleryPage, activeNewArrivalsPage, activePrivacyPolicyPage, activeProductSlug, prefersReducedMotion]);
 
   useEffect(() => {
     let ticking = false;
@@ -709,7 +717,7 @@ function App() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [activeProductSlug, activeClientPage, activeAboutPage, activeAchievementPage, activeGalleryPage, activeNewArrivalsPage]);
+  }, [activeProductSlug, activeClientPage, activeAboutPage, activeAchievementPage, activeGalleryPage, activeNewArrivalsPage, activePrivacyPolicyPage]);
 
   useEffect(() => {
     const sections = document.querySelectorAll("main section[id]");
@@ -725,7 +733,7 @@ function App() {
     );
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, [activeProductSlug, activeClientPage, activeAboutPage, activeAchievementPage, activeGalleryPage, activeNewArrivalsPage]);
+  }, [activeProductSlug, activeClientPage, activeAboutPage, activeAchievementPage, activeGalleryPage, activeNewArrivalsPage, activePrivacyPolicyPage]);
 
   useEffect(() => {
     const getRevealElements = () => Array.from(document.querySelectorAll("[data-reveal]"));
@@ -785,7 +793,7 @@ function App() {
       fallbackTimers.forEach((timer) => window.clearTimeout(timer));
       observer.disconnect();
     };
-  }, [activeProductSlug, activeClientPage, activeAboutPage, activeAchievementPage, activeGalleryPage, activeNewArrivalsPage]);
+  }, [activeProductSlug, activeClientPage, activeAboutPage, activeAchievementPage, activeGalleryPage, activeNewArrivalsPage, activePrivacyPolicyPage]);
 
   useEffect(() => {
     if (!statsGridRef.current || statsActive) return undefined;
@@ -802,7 +810,7 @@ function App() {
 
     observer.observe(statsGridRef.current);
     return () => observer.disconnect();
-  }, [activeAboutPage, activeAchievementPage, activeClientPage, activeGalleryPage, activeNewArrivalsPage, activeProductPage, statsActive]);
+  }, [activeAboutPage, activeAchievementPage, activeClientPage, activeGalleryPage, activeNewArrivalsPage, activePrivacyPolicyPage, activeProductPage, statsActive]);
 
   useEffect(() => {
     const syncRoute = () => {
@@ -812,6 +820,7 @@ function App() {
       setActiveAchievementPage(getAchievementRouteFromHash());
       setActiveGalleryPage(getGalleryRouteFromHash());
       setActiveNewArrivalsPage(getNewArrivalsRouteFromHash());
+      setActivePrivacyPolicyPage(getPrivacyPolicyRouteFromHash());
       setMenuOpen(false);
       setProductMenuOpen(false);
     };
@@ -837,9 +846,11 @@ function App() {
               ? "Gallery | Smart Buddy"
               : activeNewArrivalsPage
                 ? "New Arrivals | Smart Buddy"
-                : "Smart Buddy | Aarya Innovtech";
+                : activePrivacyPolicyPage
+                  ? "Privacy Policy | Smart Buddy"
+                  : "Smart Buddy | Aarya Innovtech";
     window.scrollTo({ top: 0, behavior: "auto" });
-  }, [activeProductPage, activeClientPage, activeAboutPage, activeAchievementPage, activeGalleryPage, activeNewArrivalsPage]);
+  }, [activeProductPage, activeClientPage, activeAboutPage, activeAchievementPage, activeGalleryPage, activeNewArrivalsPage, activePrivacyPolicyPage]);
 
   useEffect(() => {
     document.body.style.overflow = selectedProduct || selectedMedia ? "hidden" : "";
@@ -895,7 +906,7 @@ function App() {
     setMenuOpen(false);
     setProductMenuOpen(false);
 
-    if (activeProductSlug || activeClientPage || activeAboutPage || activeAchievementPage || activeGalleryPage || activeNewArrivalsPage) {
+    if (activeProductSlug || activeClientPage || activeAboutPage || activeAchievementPage || activeGalleryPage || activeNewArrivalsPage || activePrivacyPolicyPage) {
       window.history.pushState(null, "", `${window.location.pathname}${window.location.search}`);
       setActiveProductSlug(null);
       setActiveClientPage(false);
@@ -903,6 +914,7 @@ function App() {
       setActiveAchievementPage(false);
       setActiveGalleryPage(false);
       setActiveNewArrivalsPage(false);
+      setActivePrivacyPolicyPage(false);
       window.requestAnimationFrame(() => {
         window.requestAnimationFrame(() => {
           document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
@@ -920,6 +932,7 @@ function App() {
     setActiveAchievementPage(false);
     setActiveGalleryPage(false);
     setActiveNewArrivalsPage(false);
+    setActivePrivacyPolicyPage(false);
 
     if (activeAboutPage) {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -936,6 +949,7 @@ function App() {
     setActiveAchievementPage(false);
     setActiveGalleryPage(false);
     setActiveNewArrivalsPage(false);
+    setActivePrivacyPolicyPage(false);
 
     if (activeClientPage) {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -952,6 +966,7 @@ function App() {
     setActiveClientPage(false);
     setActiveGalleryPage(false);
     setActiveNewArrivalsPage(false);
+    setActivePrivacyPolicyPage(false);
 
     if (activeAchievementPage) {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -968,6 +983,7 @@ function App() {
     setActiveClientPage(false);
     setActiveAchievementPage(false);
     setActiveNewArrivalsPage(false);
+    setActivePrivacyPolicyPage(false);
 
     if (activeGalleryPage) {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -985,6 +1001,7 @@ function App() {
     setActiveAchievementPage(false);
     setActiveGalleryPage(false);
     setActiveNewArrivalsPage(false);
+    setActivePrivacyPolicyPage(false);
     if (activeProductSlug === slug) {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
@@ -1000,6 +1017,7 @@ function App() {
     setActiveAboutPage(false);
     setActiveAchievementPage(false);
     setActiveGalleryPage(false);
+    setActivePrivacyPolicyPage(false);
 
     if (activeNewArrivalsPage) {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1007,6 +1025,24 @@ function App() {
     }
 
     window.location.hash = "/new-arrivals";
+  };
+
+  const navigateToPrivacyPolicy = () => {
+    setMenuOpen(false);
+    setProductMenuOpen(false);
+    setActiveProductSlug(null);
+    setActiveClientPage(false);
+    setActiveAboutPage(false);
+    setActiveAchievementPage(false);
+    setActiveGalleryPage(false);
+    setActiveNewArrivalsPage(false);
+
+    if (activePrivacyPolicyPage) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    window.location.hash = "/privacy-policy";
   };
 
   const openProduct = (product) => {
@@ -1050,7 +1086,7 @@ function App() {
       {loaderVisible ? (
         <div className={`site-loader ${siteLoading ? "" : "is-hidden"}`} role="status" aria-label="Loading Smart Buddy website">
           <div className="site-loader-panel">
-            <img src="/images/620e4382b29c9logo.png" alt="" aria-hidden="true" decoding="async" />
+            <img src={smartBuddyLogo} alt="" aria-hidden="true" decoding="async" />
             <div
               className="site-loader-track"
               role="progressbar"
@@ -1066,32 +1102,22 @@ function App() {
         </div>
       ) : null}
       <m.header
-        className={`site-header ${scrolled || activeAboutPage || activeNewArrivalsPage ? "is-scrolled" : ""}`}
+        className={`site-header ${scrolled || activeAboutPage || activeNewArrivalsPage || activePrivacyPolicyPage ? "is-scrolled" : ""}`}
         variants={navbarVariants}
         initial={motionInitial}
         animate="visible"
       >
         <span className="scroll-progress" style={{ width: `${scrollProgress}%` }} />
-        <div className="topline">
-          <div className="container topline-inner">
-            <p>North Maharashtra's Fastest-Growing Startup, Leading India's Smart Eco Toilet Revolution.</p>
-            <div className="topline-links">
-              <a href="mailto:sales@smartbuddy.co.in">
-                <Mail size={14} /> sales@smartbuddy.co.in
-              </a>
-            </div>
-          </div>
-        </div>
         <nav className="container navbar" aria-label="Main navigation">
           <button className="brand" onClick={() => scrollToSection("home")} aria-label="Go to home">
-            <img src="/images/620e4382b29c9logo.png" alt="Smart Buddy" />
+            <img src={smartBuddyLogo} alt="Smart Buddy" />
           </button>
           <div className={`nav-links ${menuOpen ? "is-open" : ""}`} id="primary-navigation">
             {navLinks.slice(0, 1).map(([label, section]) => (
               <button
-                className={!activeProductPage && !activeClientPage && !activeAboutPage && !activeAchievementPage && !activeGalleryPage && !activeNewArrivalsPage && activeSection === section ? "is-active" : ""}
+                className={!activeProductPage && !activeClientPage && !activeAboutPage && !activeAchievementPage && !activeGalleryPage && !activeNewArrivalsPage && !activePrivacyPolicyPage && activeSection === section ? "is-active" : ""}
                 onClick={() => scrollToSection(section)}
-                aria-current={!activeProductPage && !activeClientPage && !activeAboutPage && !activeAchievementPage && !activeGalleryPage && !activeNewArrivalsPage && activeSection === section ? "page" : undefined}
+                aria-current={!activeProductPage && !activeClientPage && !activeAboutPage && !activeAchievementPage && !activeGalleryPage && !activeNewArrivalsPage && !activePrivacyPolicyPage && activeSection === section ? "page" : undefined}
                 key={section}
               >
                 {label}
@@ -1155,7 +1181,7 @@ function App() {
                       ? "is-active"
                     : section === "clients" && activeClientPage
                       ? "is-active"
-                      : !activeProductPage && !activeClientPage && !activeAboutPage && !activeAchievementPage && !activeGalleryPage && !activeNewArrivalsPage && activeSection === section
+                      : !activeProductPage && !activeClientPage && !activeAboutPage && !activeAchievementPage && !activeGalleryPage && !activeNewArrivalsPage && !activePrivacyPolicyPage && activeSection === section
                         ? "is-active"
                         : ""
                 }
@@ -1165,7 +1191,7 @@ function App() {
                   (section === "achievements" && activeAchievementPage) ||
                   (section === "gallery" && activeGalleryPage) ||
                   (section === "clients" && activeClientPage) ||
-                  (!activeProductPage && !activeClientPage && !activeAboutPage && !activeAchievementPage && !activeGalleryPage && !activeNewArrivalsPage && activeSection === section)
+                  (!activeProductPage && !activeClientPage && !activeAboutPage && !activeAchievementPage && !activeGalleryPage && !activeNewArrivalsPage && !activePrivacyPolicyPage && activeSection === section)
                     ? "page"
                     : undefined
                 }
@@ -1217,6 +1243,8 @@ function App() {
               <GalleryPage onNavigateHome={scrollToSection} onOpenMedia={setSelectedMedia} />
             ) : activeNewArrivalsPage ? (
               <NewArrivalsPage onNavigateHome={scrollToSection} />
+            ) : activePrivacyPolicyPage ? (
+              <PrivacyPolicyPage onNavigateHome={scrollToSection} />
             ) : (
               <>
           <section className="hero" id="home">
@@ -1765,7 +1793,7 @@ function App() {
         </div>
         <div className="container footer-grid">
           <div className="footer-brand">
-            <img src="/images/620e4382b29c9logo.png" alt="Smart Buddy" loading="lazy" decoding="async" />
+            <img src={smartBuddyLogo} alt="Smart Buddy" loading="lazy" decoding="async" />
             <p>Original Equipment Manufacturer of Special Purpose Machines in Hygiene Sector since 2010.</p>
             <span>Ideas engineered into reality.</span>
           </div>
@@ -1783,10 +1811,15 @@ function App() {
           </div>
         </div>
         <div className="container footer-bottom">
-          <p>(c) {new Date().getFullYear()} Aarya Innovtech. All rights reserved.</p>
-          <button onClick={() => activeProductPage || activeClientPage || activeAboutPage || activeAchievementPage || activeGalleryPage || activeNewArrivalsPage ? window.scrollTo({ top: 0, behavior: "smooth" }) : scrollToSection("home")} type="button">
-            Back to top <ArrowUpRight size={14} />
-          </button>
+          <p>All copyright reserve Aarya Innov Tech</p>
+          <div className="footer-bottom-actions">
+            <button onClick={navigateToPrivacyPolicy} type="button">
+              Privacy Policy <ArrowUpRight size={14} />
+            </button>
+            <button onClick={() => activeProductPage || activeClientPage || activeAboutPage || activeAchievementPage || activeGalleryPage || activeNewArrivalsPage || activePrivacyPolicyPage ? window.scrollTo({ top: 0, behavior: "smooth" }) : scrollToSection("home")} type="button">
+              Back to top <ArrowUpRight size={14} />
+            </button>
+          </div>
         </div>
       </m.footer>
 
