@@ -1776,7 +1776,7 @@ activeGalleryPage, activeContactPage, activeNewArrivalsPage, activePrivacyPolicy
     window.clearTimeout(mailResetTimerRef.current);
 
     try {
-      const response = await fetch("/api/send-mail", {
+      const response = await fetch("https://aaryainnovtech1.vercel.app/api/send-mail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type: "contact", name, phone, message, website, formStartedAt }),

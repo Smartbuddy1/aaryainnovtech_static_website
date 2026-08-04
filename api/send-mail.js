@@ -67,6 +67,10 @@ const hasValidOrigin = (req) => {
       .map((item) => item.trim().toLowerCase())
       .filter(Boolean);
 
+    // Hardcoded allowed domains for EC2
+    configuredOrigins.push("https://aaryainnovtech.com");
+    configuredOrigins.push("https://www.aaryainnovtech.com");
+
     return originUrl.host.toLowerCase() === host.toLowerCase() || configuredOrigins.includes(originUrl.origin.toLowerCase());
   } catch {
     return false;
@@ -342,6 +346,16 @@ const buildCareerEmail = (payload) => {
 };
 
 module.exports = async (req, res) => {
+  // CORS Headers
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
+  }
+
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     res.status(405).json({ ok: false, message: "Method not allowed." });

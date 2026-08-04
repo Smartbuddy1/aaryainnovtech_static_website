@@ -146,7 +146,7 @@ function CareerPage({ onNavigateHome }) {
 
     try {
       const attachmentContent = await fileToBase64(resume);
-      const response = await fetch("/api/send-mail", {
+      const response = await fetch("https://aaryainnovtech1.vercel.app/api/send-mail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
