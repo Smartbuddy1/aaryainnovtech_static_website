@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery - Aarya Innovtech</title>
+    <link rel="icon" href="assets/images/favicon.png" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Aarya Innovtech home">
+        <img src="assets/images/logo.png" alt="Aarya Innovtech Pvt. Ltd." />
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="products.html">Products</a>
+        <a class="active" href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+        <a class="login-link" href="login.html">Login</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <h1>Gallery</h1>
+          <p><a href="index.html">Home</a> <span>/</span> Gallery</p>
+        </div>
+      </section>
+
+      <section class="section gallery-section">
+        <div class="container">
+          <div class="gallery-tabs" role="tablist" aria-label="Gallery filters">
+            <button class="active" type="button" data-filter="products">Products</button>
+            <button type="button" data-filter="projects">Projects</button>
+            <button type="button" data-filter="factory">Factory</button>
+          </div>
+          <div class="gallery-grid">
+            <article data-gallery="products"><img src="assets/images/products/electronic-eco-toilet.png" alt="Electronic eco toilet" /></article>
+            <article data-gallery="products"><img src="assets/images/products/organic-waste-composter.png" alt="Organic waste composter" /></article>
+            <article data-gallery="products"><img src="assets/images/products/pet-bottle-shredder.png" alt="PET bottle shredder" /></article>
+            <article data-gallery="products"><img src="assets/images/products/portable-infrastructure.jpeg" alt="Portable infrastructure" /></article>
+            <article data-gallery="projects"><img src="assets/images/gallery/ranchi-eco-toilet.jpeg" alt="Eco toilet project" /></article>
+            <article data-gallery="projects"><img src="assets/images/gallery/toilet-block.jpeg" alt="Public toilet block" /></article>
+            <article data-gallery="projects"><img src="assets/images/gallery/solar-smart-toilet.jpeg" alt="Solar smart toilet block" /></article>
+            <article data-gallery="projects"><img src="assets/images/gallery/utility-shop-toilet.jpeg" alt="Utility shop toilet" /></article>
+            <article data-gallery="factory"><img src="assets/images/gallery/production-review.jpeg" alt="Production review" /></article>
+            <article data-gallery="factory"><img src="assets/images/gallery/workshop.jpeg" alt="Workshop meeting" /></article>
+            <article data-gallery="factory"><img src="assets/images/gallery/site-visit.jpg" alt="Site visit" /></article>
+            <article data-gallery="factory"><img src="assets/images/gallery/public-block.jpg" alt="Quality inspection" /></article>
+          </div>
+          <div class="gallery-action">
+            <button class="btn primary" type="button" data-filter="all">View More Photos</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

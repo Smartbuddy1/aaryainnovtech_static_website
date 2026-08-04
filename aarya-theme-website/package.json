@@ -1,0 +1,10 @@
+{
+  "name": "aarya-theme-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Standalone static Aarya Innovtech theme website.",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  }
+}
