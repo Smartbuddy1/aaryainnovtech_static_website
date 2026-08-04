@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
+import SEO from "./components/SEO.jsx";
 import {
   ArrowRight,
   ArrowUp,
@@ -1385,27 +1386,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    document.title = activeProductPage
-      ? `${activeProductPage.title} | Aarya Innovtech`
-      : activeClientPage
-        ? "Clients | Aarya Innovtech"
-        : activeAboutPage
-          ? "About | Aarya Innovtech"
-        : activeAchievementPage
-          ? "Achievements | Aarya Innovtech"
-          : activeCareerPage
-            ? "Careers | Aarya Innovtech"
-            : activeGalleryPage
-              ? "Gallery | Aarya Innovtech"
-              : activeContactPage
-                ? "Contact | Aarya Innovtech"
-                : activeNewArrivalsPage
-                  ? "New Arrivals | Aarya Innovtech"
-                  : activePrivacyPolicyPage
-                    ? "Privacy Policy | Aarya Innovtech"
-                    : "Aarya Innovtech | Eco Hygiene Solutions";
     window.scrollTo({ top: 0, behavior: "auto" });
-  }, [activeProductPage, activeClientPage, activeAboutPage, activeAchievementPage, activeCareerPage, activeGalleryPage, activeContactPage, activeNewArrivalsPage, activePrivacyPolicyPage]);
+  }, [activeProductPage, activeClientPage, activeAboutPage, activeAchievementPage, activeCareerPage, 
+activeGalleryPage, activeContactPage, activeNewArrivalsPage, activePrivacyPolicyPage]);
 
   useEffect(() => {
     const activeModal = selectedMedia ? mediaModalRef.current : selectedProduct ? productModalRef.current : null;
@@ -1812,9 +1795,24 @@ function App() {
     }
   };
 
+  const getSEOProps = () => {
+    if (activeProductPage) return { title: activeProductPage.title, description: activeProductPage.short };
+    if (activeClientPage) return { title: "Clients", description: "Trusted by public-sector and institutional organizations." };
+    if (activeAboutPage) return { title: "About", description: "Learn more about Aarya Innovtech." };
+    if (activeAchievementPage) return { title: "Achievements", description: "Our awards and recognitions." };
+    if (activeCareerPage) return { title: "Careers", description: "Join our team." };
+    if (activeGalleryPage) return { title: "Gallery", description: "Photos and videos of our installations." };
+    if (activeContactPage) return { title: "Contact", description: "Get in touch with Aarya Innovtech." };
+    if (activeNewArrivalsPage) return { title: "New Arrivals", description: "Check out our latest product arrivals." };
+    if (activePrivacyPolicyPage) return { title: "Privacy Policy", description: "Our privacy policy." };
+    return { title: "Eco Hygiene & Waste Management Solutions", description: "Aarya Innovtech manufactures eco-friendly hygiene, sanitation, recycling, kiosk, and waste-management solutions." };
+  };
+  const seoProps = getSEOProps();
+
   return (
     <LazyMotion features={domAnimation}>
       <>
+        <SEO {...seoProps} />
         {loaderVisible ? (
           <div className={`site-loader ${siteLoading ? "" : "is-hidden"}`} role="status" aria-label="Loading Aarya Innovtech website">
             <div className="site-loader-panel">

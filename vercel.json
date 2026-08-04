@@ -2,6 +2,58 @@
   "installCommand": "cd Frontend && npm ci",
   "buildCommand": "cd Frontend && npm run build",
   "outputDirectory": "Frontend/dist",
+  "redirects": [
+    {
+      "source": "/about.php",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/contact.php",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/electronic_eco_toilet.php",
+      "destination": "/products/electronic-eco-toilet",
+      "permanent": true
+    },
+    {
+      "source": "/bio_digester.php",
+      "destination": "/products/bio-digester",
+      "permanent": true
+    },
+    {
+      "source": "/organic_waste_composter.php",
+      "destination": "/products/organic-waste-composter",
+      "permanent": true
+    },
+    {
+      "source": "/computer_kiosk.php",
+      "destination": "/products/computer-kiosk",
+      "permanent": true
+    },
+    {
+      "source": "/achievements.php",
+      "destination": "/achievements",
+      "permanent": true
+    },
+    {
+      "source": "/our_clients.php",
+      "destination": "/clients",
+      "permanent": true
+    },
+    {
+      "source": "/photo_gallery.php",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/video_gallery.php",
+      "destination": "/gallery",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
