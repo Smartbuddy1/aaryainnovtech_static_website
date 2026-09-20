@@ -1958,7 +1958,7 @@ activeGalleryPage, activeContactPage, activeNewArrivalsPage, activePrivacyPolicy
                 onClick={() => {
                   setMenuOpen(false);
                   setProductMenuOpen(false);
-                  window.location.assign("https://smartbuddyiot.vercel.app/login");
+                  window.location.assign("https://aaryainnovtech.com/e2t/login");
                 }}
               >
                 Login
