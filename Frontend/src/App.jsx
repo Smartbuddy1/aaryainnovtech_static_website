@@ -2520,7 +2520,7 @@ activeGalleryPage, activeContactPage, activeNewArrivalsPage, activePrivacyPolicy
                   <i><Phone size={21} /></i>
                   <span>
                     <strong>+91 88067 96868 / +91 9923810197</strong>
-                    <small>Mon - Sat: 10:00 AM - 06:00 PM</small>
+                    <small>Sun - Fri: 10:00 AM - 06:00 PM</small>
                   </span>
                 </a>
                 <a className="footer-contact-item" href="mailto:sales@aaryainnovtech.com">
