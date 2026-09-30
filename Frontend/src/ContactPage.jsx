@@ -47,7 +47,7 @@ function ContactPage({ onNavigateHome, onSubmit, mailStatus }) {
             </p>
 
             <div className="contact-benefits">
-              <span><BadgeCheck size={15} /> OEM since 2010</span>
+              <span><BadgeCheck size={15} /> OEM since 2019</span>
               <span><Wrench size={15} /> Hygiene-sector product range</span>
               <span><Globe2 size={15} /> Installed across India</span>
             </div>

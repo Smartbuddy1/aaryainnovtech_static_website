@@ -17,7 +17,7 @@ const featuredClients = clientRecords.slice(0, 8);
 
 const clientStats = [
   { value: String(clientRecords.length), label: "Client records", icon: Users },
-  { value: "2010", label: "OEM since", icon: Factory },
+  { value: "2019", label: "OEM since", icon: Factory },
   { value: "4.7+", label: "GeM rating", icon: BadgeCheck },
   { value: "PAN", label: "India support", icon: Globe2 },
 ];

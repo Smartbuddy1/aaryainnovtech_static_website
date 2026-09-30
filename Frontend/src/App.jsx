@@ -480,7 +480,7 @@ const solutionJourneys = [
 ];
 
 const stats = [
-  { value: "2010", label: "Since", detail: "OEM in hygiene sector", icon: Award },
+  { value: "2019", label: "Since", detail: "OEM in hygiene sector", icon: Award },
   { value: "500L", label: "Water tank", detail: "E2T overhead tank quantity", icon: Droplets },
   { value: ">99%", label: "Pathogen reduction", detail: "Bio-Digester hygiene performance", icon: ShieldCheck },
   { value: "24x7", label: "Surveillance", detail: "Voice assistance and anti-theft alarm", icon: Monitor },
@@ -2064,7 +2064,7 @@ activeGalleryPage, activeContactPage, activeNewArrivalsPage, activePrivacyPolicy
                             <m.div className="hero-proof-strip" aria-label="Aarya Innovtech proof points" variants={heroItemVariants} style={{ marginTop: "32px", width: "fit-content" }}>
                               <div>
                                 <ShieldCheck size={22} />
-                                <p><strong>OEM since 2010</strong><span>Trusted by government & private organizations</span></p>
+                                <p><strong>OEM since 2019</strong><span>Trusted by government & private organizations</span></p>
                               </div>
                               <div>
                                 <BadgeCheck size={22} />
@@ -2160,7 +2160,7 @@ activeGalleryPage, activeContactPage, activeNewArrivalsPage, activePrivacyPolicy
                         <div className="container intro-grid" data-reveal>
                           <div>
                             <BadgeCheck size={23} />
-                            <p><strong>OEM since 2010</strong><span>Special purpose machines</span></p>
+                            <p><strong>OEM since 2019</strong><span>Special purpose machines</span></p>
                           </div>
                           <div>
                             <Star size={23} />
@@ -2180,7 +2180,7 @@ activeGalleryPage, activeContactPage, activeNewArrivalsPage, activePrivacyPolicy
                               <img src={newImage("11-eco-toilet-ranchi-twin-1200x800.jpg")} alt="Installed electronic eco toilets" loading="lazy" decoding="async" />
                             </div>
                             <div className="experience-badge">
-                              <strong>2010</strong>
+                              <strong>2019</strong>
                               <span>OEM since</span>
                             </div>
                           </div>
@@ -2189,7 +2189,7 @@ activeGalleryPage, activeContactPage, activeNewArrivalsPage, activePrivacyPolicy
                             <h2>Original Equipment Manufacturer of special purpose machines.</h2>
                             <p className="lead">
                               Aarya Innovtech is an OEM for hygiene-sector special purpose machines
-                              since 2010.
+                              since 2019.
                             </p>
                             <p>
                               The product range covers Electronic ECO Toilet, Bio-Digester, Organic Waste

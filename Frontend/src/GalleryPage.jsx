@@ -253,7 +253,7 @@ function GalleryPage({ onNavigateHome, onOpenMedia }) {
             </div>
             <div className="gallery-page-summary" aria-label="Gallery summary">
               <span><strong>{gallerySections.length}</strong> sections</span>
-              <span><strong>2010+</strong> journey</span>
+              <span><strong>Since 2019</strong></span>
             </div>
           </div>
 
