@@ -4892,7 +4892,7 @@ a.footer-contact-item:hover i {
 }
 
 .floating-whatsapp {
-  bottom: 86px;
+  bottom: 20px;
   background: #25d366;
   box-shadow:
     0 12px 28px rgba(37, 211, 102, 0.24),
@@ -4900,7 +4900,7 @@ a.footer-contact-item:hover i {
 }
 
 .floating-call {
-  bottom: 152px;
+  bottom: 86px;
   background: var(--green);
   box-shadow:
     0 12px 28px rgba(8, 125, 97, 0.24),
@@ -17738,14 +17738,14 @@ button:disabled,
   }
 
   .floating-whatsapp {
-    bottom: 78px !important;
+    bottom: 18px !important;
     right: 18px !important;
     width: 50px !important;
     height: 50px !important;
   }
 
   .floating-call {
-    bottom: 138px !important;
+    bottom: 78px !important;
     right: 18px !important;
     width: 50px !important;
     height: 50px !important;
@@ -17789,14 +17789,8 @@ button:disabled,
    ========================================================= */
 
 /* Prevent any accidental horizontal scrolling */
-html,
-body {
-  overflow-x: hidden !important;
-  max-width: 100vw !important;
-}
-
 main {
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
 }
 
@@ -17996,18 +17990,17 @@ main {
   }
 
   .floating-whatsapp,
-  .floating-call,
-  .chatbot-fab {
+  .floating-call {
     width: 46px !important;
     height: 46px !important;
     right: 14px !important;
   }
 
   .floating-whatsapp {
-    bottom: 70px !important;
+    bottom: 16px !important;
   }
 
   .floating-call {
-    bottom: 124px !important;
+    bottom: 70px !important;
   }
 }

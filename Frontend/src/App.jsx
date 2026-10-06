@@ -1,7 +1,6 @@
 import React, { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 import SEO from "./components/SEO.jsx";
-import Chatbot from "./components/Chatbot.jsx";
 import {
   ArrowRight,
   ArrowUp,
@@ -2690,8 +2689,6 @@ function App() {
             </article>
           </div>
         )}
-
-        {introReady && <Chatbot />}
       </>
     </LazyMotion>
   );
