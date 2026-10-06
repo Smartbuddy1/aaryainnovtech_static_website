@@ -148,9 +148,19 @@ const featuredMoments = achievementSections.slice(0, 4).map((section) => ({
   target: section.id,
 }));
 
-function AchievementPage({ onNavigateHome }) {
+function AchievementPage({ onNavigateHome, onOpenMedia }) {
   const scrollToEvent = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const openMedia = (image, sectionEyebrow) => {
+    onOpenMedia?.({
+      title: image.alt,
+      category: sectionEyebrow,
+      src: image.src,
+      alt: image.alt,
+      type: "image",
+    });
   };
 
   return (
@@ -288,8 +298,9 @@ function AchievementPage({ onNavigateHome }) {
                     <figure
                       className={imageIndex === 0 ? "is-wide" : ""}
                       data-reveal
-                      style={{ "--achievement-image": `url(${image.src})`, "--reveal-delay": `${Math.min(imageIndex, 10) * 38}ms` }}
+                      style={{ "--achievement-image": `url(${image.src})`, "--reveal-delay": `${Math.min(imageIndex, 10) * 38}ms`, cursor: "pointer" }}
                       key={image.id || image.src}
+                      onClick={() => openMedia(image, section.eyebrow)}
                     >
                       <img
                         src={image.src}

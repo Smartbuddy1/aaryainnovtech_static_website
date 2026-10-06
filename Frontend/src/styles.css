@@ -17961,16 +17961,21 @@ main {
 /* Small Smartphone Devices (<= 480px) */
 @media (max-width: 480px) {
   .site-header {
-    padding: 10px 12px 0 !important;
+    padding: 10px 6px 0 !important;
   }
 
   .navbar {
-    padding: 10px 14px !important;
+    padding: 10px 8px !important;
+  }
+
+  .brand {
+    justify-items: start !important;
   }
 
   .brand img {
     height: 34px !important;
     width: auto !important;
+    margin-left: -4px !important;
   }
 
   .hero {

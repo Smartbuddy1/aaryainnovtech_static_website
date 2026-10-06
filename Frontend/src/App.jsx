@@ -2078,7 +2078,7 @@ function App() {
                   ) : activeAboutPage ? (
                     <AboutPage onNavigateHome={scrollToSection} />
                   ) : activeAchievementPage ? (
-                    <AchievementPage onNavigateHome={scrollToSection} />
+                    <AchievementPage onNavigateHome={scrollToSection} onOpenMedia={setSelectedMedia} />
                   ) : activeCareerPage ? (
                     <CareerPage onNavigateHome={scrollToSection} />
                   ) : activeGalleryPage ? (
