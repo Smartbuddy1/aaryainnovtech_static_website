@@ -284,7 +284,10 @@ const sendMail = async ({ message, to }) => {
     await command(socket, "AUTH LOGIN");
     await command(socket, Buffer.from(user).toString("base64"));
     await command(socket, Buffer.from(pass).toString("base64"));
+    console.log("SMTP MAIL FROM:", from);
     await command(socket, `MAIL FROM:<${from}>`);
+    
+    console.log("SMTP RCPT TO:", recipient);
     await command(socket, `RCPT TO:<${recipient}>`);
     await command(socket, "DATA");
     socket.write(`${message}\r\n.\r\n`);
