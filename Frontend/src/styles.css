@@ -15577,6 +15577,11 @@ textarea::placeholder {
   height: auto;
   object-fit: contain;
   object-position: center;
+  mix-blend-mode: darken;
+}
+
+.product-category-hero[data-product="bio-digester"] .product-category-main-image img {
+  transform: scale(1.4);
 }
 
 .product-category-thumbs {

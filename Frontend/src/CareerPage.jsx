@@ -99,6 +99,7 @@ function CareerPage({ onNavigateHome }) {
   const [resumeName, setResumeName] = useState("");
   const [resumeError, setResumeError] = useState("");
   const [submitLocked, setSubmitLocked] = useState(false);
+  const [isFormVisible, setIsFormVisible] = useState(false);
   const formRef = useRef(null);
   const submitTimerRef = useRef(null);
   const formLoadTime = useRef(Date.now()).current;
@@ -115,13 +116,17 @@ function CareerPage({ onNavigateHome }) {
   const handleApplyClick = (dept, pos) => {
     setSelectedDepartment(dept);
     setSelectedPosition(pos);
-    if (formRef.current) {
-      formRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-      const nameInput = formRef.current.querySelector("#career-name");
-      if (nameInput) {
-        setTimeout(() => nameInput.focus(), 450);
+    setIsFormVisible(true);
+    
+    setTimeout(() => {
+      if (formRef.current) {
+        formRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+        const nameInput = formRef.current.querySelector("#career-name");
+        if (nameInput) {
+          setTimeout(() => nameInput.focus(), 450);
+        }
       }
-    }
+    }, 50);
   };
 
   const handleResumeChange = (event) => {
@@ -431,7 +436,7 @@ function CareerPage({ onNavigateHome }) {
                   <button
                     type="button"
                     className="button primary small"
-                    onClick={() => handleApplyClick("Other / General", "Open Application / Any Role")}
+                    onClick={() => handleApplyClick("", "")}
                     style={{
                       background: "#0bbfa6",
                       color: "#ffffff",
@@ -453,7 +458,8 @@ function CareerPage({ onNavigateHome }) {
             </div>
 
             {/* Bottom Section: Direct Apply Form */}
-            <form className="career-application-form" id="career-apply-form" ref={formRef} onSubmit={handleSubmit}>
+            {isFormVisible && (
+              <form className="career-application-form" id="career-apply-form" ref={formRef} onSubmit={handleSubmit}>
               <div className="form-trap" aria-hidden="true">
                 <label htmlFor="career-company-website">Company website</label>
                 <input id="career-company-website" name="companyWebsite" type="text" tabIndex={-1} autoComplete="off" />
@@ -599,6 +605,7 @@ function CareerPage({ onNavigateHome }) {
                 </div>
               )}
             </form>
+            )}
           </div>
         </div>
       </section>

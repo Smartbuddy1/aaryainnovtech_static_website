@@ -122,7 +122,7 @@ function ProductPage({ product, onNavigateHome, onNavigateProduct }) {
         </div>
       </section>
 
-      <section className="product-category-hero">
+      <section className="product-category-hero" data-product={product.slug}>
         <div className="container product-category-hero-grid">
           <div className="product-category-media" data-reveal>
             <figure className="product-category-main-image">

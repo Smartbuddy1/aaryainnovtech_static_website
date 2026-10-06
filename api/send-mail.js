@@ -188,7 +188,7 @@ const command = (socket, line) =>
         socket.off("data", onData);
         const code = Number(lastLine.slice(0, 3));
         if (code >= 400) {
-          reject(new Error(`SMTP command failed: ${code}`));
+          reject(new Error(`SMTP command failed: ${code} - ${response}`));
           return;
         }
         resolve(response);
