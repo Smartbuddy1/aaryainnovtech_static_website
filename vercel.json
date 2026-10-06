@@ -1,0 +1,104 @@
+{
+  "installCommand": "cd Frontend && npm ci",
+  "buildCommand": "cd Frontend && npm run build",
+  "outputDirectory": "Frontend/dist",
+  "redirects": [
+    {
+      "source": "/about.php",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/contact.php",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/electronic_eco_toilet.php",
+      "destination": "/products/electronic-eco-toilet",
+      "permanent": true
+    },
+    {
+      "source": "/bio_digester.php",
+      "destination": "/products/bio-digester",
+      "permanent": true
+    },
+    {
+      "source": "/organic_waste_composter.php",
+      "destination": "/products/organic-waste-composter",
+      "permanent": true
+    },
+    {
+      "source": "/computer_kiosk.php",
+      "destination": "/products/computer-kiosk",
+      "permanent": true
+    },
+    {
+      "source": "/achievements.php",
+      "destination": "/achievements",
+      "permanent": true
+    },
+    {
+      "source": "/our_clients.php",
+      "destination": "/clients",
+      "permanent": true
+    },
+    {
+      "source": "/photo_gallery.php",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/video_gallery.php",
+      "destination": "/gallery",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/media/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://*.tile.openstreetmap.org; font-src 'self' https://fonts.gstatic.com; media-src 'self'; connect-src 'self' https://*.tile.openstreetmap.org; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'; upgrade-insecure-requests"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

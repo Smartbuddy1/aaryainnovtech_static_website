@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "aaryainnovtech-static-website",
+  "compatibility_date": "2026-06-17",
+  "assets": {
+    "directory": "./Frontend/dist",
+    "not_found_handling": "single-page-application"
+  },
+  "build": {
+    "command": "npm ci && npm run build",
+    "cwd": "Frontend"
+  }
+}
